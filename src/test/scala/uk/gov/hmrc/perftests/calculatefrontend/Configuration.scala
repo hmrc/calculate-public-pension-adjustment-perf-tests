@@ -23,13 +23,18 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 trait Configuration extends ServicesConfiguration {
 
-  val calculationUrl: String                  = baseUrlFor("calculate-stub")
-  private val csrfTokenPattern: String        = """<input type="hidden" name="csrfToken"\s+value="([^"]+)""""
-  private val totalIncreaseTaxPattern: String =
-    """<th scope="row" class="govuk-table__header">Total increase in tax charges<\/th>\s+<td class="govuk-table__cell">(\d+)<\/td>"""
-  def saveCsrfToken: HttpCheck                =
+  val authUrl: String                     = baseUrlFor("auth-login-stub")
+  val sessionUrl: String                  = baseUrlFor("auth-session-stub")
+  val calculationUrl: String              = baseUrlFor("calculate-stub")
+  val submissionFrontendUrl: String       = baseUrlFor("submit-stub")
+  val finalSubmissionFrontendUrl: String  = baseUrlFor("final-submit-stub")
+  private val csrfTokenPattern: String    = """<input type="hidden" name="csrfToken"\s+value="([^"]+)"""
+  private val sessionTokenPattern: String = """Bearer\s([^,]+)"""
+
+  def saveCsrfToken: HttpCheck =
     regex(_ => csrfTokenPattern).saveAs("csrfToken")
 
-  def saveTotIncreaseTax: HttpCheck =
-    regex(_ => totalIncreaseTaxPattern).find.saveAs("totIncreaseTax")
+  def saveSessionToken: HttpCheck =
+    regex(_ => sessionTokenPattern).saveAs("sessionToken")
+
 }
