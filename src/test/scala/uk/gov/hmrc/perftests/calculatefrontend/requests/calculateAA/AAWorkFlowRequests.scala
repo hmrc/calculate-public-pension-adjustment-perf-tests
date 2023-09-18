@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.calculatefrontend.requests
+package uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._

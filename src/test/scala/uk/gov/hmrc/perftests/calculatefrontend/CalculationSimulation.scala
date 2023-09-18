@@ -17,12 +17,15 @@
 package uk.gov.hmrc.perftests.calculatefrontend
 
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-import uk.gov.hmrc.perftests.calculatefrontend.requests.AAWorkFlowRequests._
-import uk.gov.hmrc.perftests.calculatefrontend.requests.BasicWorkFlowRequests._
-import uk.gov.hmrc.perftests.calculatefrontend.requests.CalculateRequests.navigateToCalculationResultPage
-import uk.gov.hmrc.perftests.calculatefrontend.requests.LTARequests._
-import uk.gov.hmrc.perftests.calculatefrontend.requests._
-
+import uk.gov.hmrc.perftests.calculatefrontend.requests.auth.AuthRequests.{getSubmissionUniqueId, loginForSubmission, navigateToAuthPage, navigateToAuthWizardSession}
+import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.AAWorkFlowRequests._
+import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.BasicWorkFlowRequests._
+import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.CalculationRequests.{navigateToCalculationResultPage, submitCalculationResultConfirmation}
+import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA._
+import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateLTA.LTARequests._
+import uk.gov.hmrc.perftests.calculatefrontend.util.NINOGenerator
+//import uk.gov.hmrc.perftests.calculatefrontend.requests.submission.SubmissionRequests.{navigateToClaimOnBehalfPage, navigateToStatusOfUserPage, navigateToTheirDateOfDeathPage, navigateToTheirDobPage, navigateToTheirNamePage, submitClaimOnBehalfPageUrlConfirmation, submitStatusOfUserPageConfirmation, submitTheirDateOfDeathPageConfirmation, submitTheirDobPageConfirmation, submitTheirNamePageConfirmation}
+import uk.gov.hmrc.perftests.calculatefrontend.requests.submission.SubmissionRequests._
 class CalculationSimulation extends PerformanceTestRunner {
 
   setup("Basic-flow", "Basic user journey")
@@ -423,7 +426,69 @@ class CalculationSimulation extends PerformanceTestRunner {
 
   setup("Calculate-results", "Calculate results")
     .withRequests(
-      navigateToCalculationResultPage
+      navigateToCalculationResultPage,
+      submitCalculationResultConfirmation()
+    )
+
+  setup("Auth-wizard", "Authorization")
+    .withRequests(
+      getSubmissionUniqueId(),
+      loginForSubmission(),
+      navigateToAuthPage
+    )
+
+  setup("Submission-route", "Submission")
+    .withRequests(
+      navigateToClaimOnBehalfPage,
+      submitClaimOnBehalfPageUrlConfirmation("true"),
+      navigateToStatusOfUserPage,
+      submitStatusOfUserPageConfirmation("deputyship"),
+      navigateToTheirNamePage,
+      submitTheirNamePageConfirmation("ABC BCDEFGHIJK"),
+      navigateToTheirDobPage,
+      submitTheirDobPageConfirmation(),
+      navigateToTheirDateOfDeathPage,
+      submitTheirDateOfDeathPageConfirmation(),
+      navigateToTheirNinoPage,
+      submitTheirNinoPageUrlConfirmation(NINOGenerator.nino),
+      navigateToTheirUTRPage,
+      submitTheirUTRPConfirmation(),
+      navigateToTheirResidencePage,
+      submitTheirResidencePageConfirmation("true"),
+      navigateToTheirUKAddressPage,
+      submitTheirUKAddressPageConfirmation(),
+      navigateToAlternativeNamePage,
+      submitAlternativeNamePageConfirmation("false"),
+      navigateToEnterAlternativeNamePage,
+      submitEnterAlternativeNamePageConfirmation("ABC BCDEFGH"),
+      navigateToContactNumberPage,
+      submitContactNumberPageConfirmation(),
+      navigateToResidencePage,
+      submitResidencePagConfirmation("false"),
+      navigateToInternationalAddressPagePage,
+      submitInternationalAddressPageConfirmation(),
+      navigateToLegacyPensionSchemeReferencePage,
+      submitLegacyPensionSchemeReferencePageConfirmation(),
+      navigateToReformPensionSchemeReferencePageUrlPage,
+      submitReformPensionSchemeReferencePageUrlConfirmation(),
+      navigateToLegacyPensionScheme2ReferencePage,
+      submitLegacyPensionScheme2ReferencePageConfirmation(),
+      navigateToReformPensionScheme2ReferencePageUrlPage,
+      submitReformPensionScheme2ReferencePageUrlConfirmation(),
+      navigateToLegacyPensionScheme3ReferencePage,
+      submitLegacyPensionScheme3ReferencePageConfirmation(),
+      navigateToReformPensionScheme3ReferencePageUrlPage,
+      submitReformPensionScheme3ReferencePageUrlConfirmation(),
+      navigateToClaimingAdditionalTaxRateReliefPageUrlPage,
+      submitClaimingAdditionalTaxRateReliefPageUrlConfirmation(),
+      navigateToTaxReliefAmountPage,
+      submitTaxReliefAmountPageUrlConfirmation(),
+      navigateToBankDetailsPage,
+      submitBankDetailsPageConfirmation(),
+      navigateToDeclarationsPage,
+      navigateToCheckYourAnswersSubmitPage,
+      navigateToAuthWizardSession,
+      submitCheckYourAnswersSubmitPageConfirmation()
     )
 
   runSimulation()

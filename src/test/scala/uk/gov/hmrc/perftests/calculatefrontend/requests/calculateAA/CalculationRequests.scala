@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.calculatefrontend.requests
+package uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.calculatefrontend.Configuration
 
-object CalculateRequests extends Configuration {
+object CalculationRequests extends Configuration {
   val expectedText1                    =
     "tr+th:contains('Total increase in tax charges')"
   val expectedText2                    =
@@ -38,5 +38,12 @@ object CalculateRequests extends Configuration {
       .check(css(expectedText1).find.exists)
       .check(css(expectedText2).find.exists)
       .check(css(expectedText3).find.exists)
+      .check(saveCsrfToken)
+
+  def submitCalculationResultConfirmation(): HttpRequestBuilder =
+    http("calculationResult")
+      .post(calculateRoute + calculationResultPageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .check(status.is(303))
 
 }
