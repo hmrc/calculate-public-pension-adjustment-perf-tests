@@ -352,6 +352,7 @@ object SubmissionRequests extends Configuration {
     http("Navigate to whichPensionSchemeWillPay")
       .get(submitRoute + bankDetailsPageUrl)
       .check(status.is(200))
+      .formParam("csrfToken", "${csrfToken}")
       .check(saveCsrfToken)
 
   def submitBankDetailsPageConfirmation(): HttpRequestBuilder =

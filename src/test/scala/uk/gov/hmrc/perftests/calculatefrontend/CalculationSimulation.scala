@@ -17,14 +17,14 @@
 package uk.gov.hmrc.perftests.calculatefrontend
 
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-import uk.gov.hmrc.perftests.calculatefrontend.requests.auth.AuthRequests.{getSubmissionUniqueId, loginForSubmission, navigateToAuthPage, navigateToAuthWizardSession}
+import uk.gov.hmrc.perftests.calculatefrontend.requests.auth.AuthRequests.{getSubmissionUniqueId, loginForSubmission, navigateToAuthPage}
 import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.AAWorkFlowRequests._
 import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.BasicWorkFlowRequests._
 import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.CalculationRequests.{navigateToCalculationResultPage, submitCalculationResultConfirmation}
 import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA._
 import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateLTA.LTARequests._
+import uk.gov.hmrc.perftests.calculatefrontend.requests.submission.SessionRequests.{loginForSession, navigateToAuthWizardSession}
 import uk.gov.hmrc.perftests.calculatefrontend.util.NINOGenerator
-//import uk.gov.hmrc.perftests.calculatefrontend.requests.submission.SubmissionRequests.{navigateToClaimOnBehalfPage, navigateToStatusOfUserPage, navigateToTheirDateOfDeathPage, navigateToTheirDobPage, navigateToTheirNamePage, submitClaimOnBehalfPageUrlConfirmation, submitStatusOfUserPageConfirmation, submitTheirDateOfDeathPageConfirmation, submitTheirDobPageConfirmation, submitTheirNamePageConfirmation}
 import uk.gov.hmrc.perftests.calculatefrontend.requests.submission.SubmissionRequests._
 class CalculationSimulation extends PerformanceTestRunner {
 
@@ -485,6 +485,7 @@ class CalculationSimulation extends PerformanceTestRunner {
       submitTaxReliefAmountPageUrlConfirmation(),
       navigateToDeclarationsPage,
       navigateToCheckYourAnswersSubmitPage,
+      loginForSession(),
       navigateToAuthWizardSession,
       submitCheckYourAnswersSubmitPageConfirmation()
     )
