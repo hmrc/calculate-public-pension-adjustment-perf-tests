@@ -14,37 +14,24 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.calculatefrontend.requests.auth
+package uk.gov.hmrc.perftests.calculatefrontend.requests.submission
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.calculatefrontend.Configuration
 
-import scala.io.Source
-
-object AuthRequests extends Configuration {
+object SessionRequests extends Configuration {
 
   val authWizardUrl: String        = s"$authUrl/auth-login-stub/gg-sign-in?"
-  val submissionUrl: String        = s"$sessionUrl/calculate-public-pension-adjustment/submission"
-  val redirectionUrl: String       =
-    s"$submissionFrontendUrl/submit-public-pension-adjustment/landing-page?submissionUniqueId="
-  val jsonPayload                  = Source.fromResource("data/calculateFrontend.json").getLines().mkString
   val authWizardSessionUrl: String = s"$authUrl/auth-login-stub/session"
 
-  def getSubmissionUniqueId(): HttpRequestBuilder =
-    http("get submission id")
-      .post(submissionUrl)
-      .header("Content-Type", "application/json")
-      .body(StringBody(jsonPayload))
-      .check(status.is(202))
-      .check(jsonPath("$.uniqueId").saveAs("submissionUniqueId"))
-  def loginForSubmission(): HttpRequestBuilder    =
-    http("Log in with submissionUniqueId")
+  def loginForSession(): HttpRequestBuilder =
+    http("Log for session")
       .post(authWizardUrl)
       .formParam("authorityId", "")
       .formParam("gatewayToken", "")
-      .formParam("redirectionUrl", redirectionUrl + "${submissionUniqueId}")
+      .formParam("redirectionUrl", s"$authUrl/auth-login-stub/session")
       .formParam("excludeGnapToken", "false")
       .formParam("credentialStrength", "strong")
       .formParam("confidenceLevel", "250")
@@ -101,8 +88,11 @@ object AuthRequests extends Configuration {
       .formParam("itmp.address.countryCode", "")
       .check(status.is(303))
 
-  val navigateToAuthPage: HttpRequestBuilder =
-    http("Navigate to auth page ")
-      .get(redirectionUrl + "${submissionUniqueId}")
-      .check(status.is(303))
+  val navigateToAuthWizardSession: HttpRequestBuilder =
+    http("Navigate to auth-login-stub/session")
+      .get(authWizardSessionUrl)
+      .check(status.is(200))
+      .formParam("csrfToken", "${csrfToken}")
+      .check(saveSessionToken)
+
 }
