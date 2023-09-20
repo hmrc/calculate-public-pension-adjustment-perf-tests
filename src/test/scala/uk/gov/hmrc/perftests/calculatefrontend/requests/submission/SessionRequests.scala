@@ -92,7 +92,6 @@ object SessionRequests extends Configuration {
     http("Navigate to auth-login-stub/session")
       .get(authWizardSessionUrl)
       .check(status.is(200))
-      .formParam("csrfToken", "${csrfToken}")
       .check(saveSessionToken)
 
 }
