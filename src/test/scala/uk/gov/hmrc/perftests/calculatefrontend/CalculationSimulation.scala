@@ -484,8 +484,7 @@ class CalculationSimulation extends PerformanceTestRunner {
       navigateToTaxReliefAmountPage,
       submitTaxReliefAmountPageUrlConfirmation(),
       navigateToDeclarationsPage,
-      navigateToCheckYourAnswersSubmitPage,
-      submitCheckYourAnswersSubmitPageConfirmation()
+      navigateToCheckYourAnswersSubmitPage
     )
 
   runSimulation()
