@@ -27,7 +27,7 @@ trait Configuration extends ServicesConfiguration {
   val sessionUrl: String                  = baseUrlFor("auth-session-stub")
   val calculationUrl: String              = baseUrlFor("calculate-stub")
   val submissionFrontendUrl: String       = baseUrlFor("submit-stub")
-  val finalSubmissionFrontendUrl: String  = baseUrlFor("final-submit-stub")
+  val finalSubmissionBackendUrl: String  = baseUrlFor("final-submit-stub")
   private val csrfTokenPattern: String    = """<input type="hidden" name="csrfToken"\s+value="([^"]+)"""
   private val sessionTokenPattern: String = """Bearer\s([^,]+)"""
 

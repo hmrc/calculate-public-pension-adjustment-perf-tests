@@ -29,7 +29,7 @@ object SubmissionRequests extends Configuration {
   val expectedPensionSchemeReference                 = "dd:contains('TAX00000629RTED')"
   val submissionConfirmation                         = "h1:contains('Adjustment sent')"
   val submitRoute: String                            = s"$submissionFrontendUrl/submit-public-pension-adjustment"
-  val finalSubmitRoute: String                       = s"$finalSubmissionFrontendUrl/submit-public-pension-adjustment"
+  val finalSubmitRoute: String                       = s"$finalSubmissionBackendUrl/submit-public-pension-adjustment"
   val claimOnBehalfPageUrl: String                   = "/claim-on-behalf"
   val statusOfUserPageUrl: String                    = "/status-of-user"
   val theirNamePageUrl: String                       = "/their-name"
@@ -377,7 +377,7 @@ object SubmissionRequests extends Configuration {
       .check(css(expectedPensionSchemeReference).find.exists)
 
   def submitCheckYourAnswersSubmitPageConfirmation(): HttpRequestBuilder =
-    http("submit check your answers")
+    http("Final Submission")
       .post(finalSubmitRoute + submitYourAnswersSubmitPageUrl)
       .headers(sessionHeaders)
       .body(StringBody(jsonPayload))
