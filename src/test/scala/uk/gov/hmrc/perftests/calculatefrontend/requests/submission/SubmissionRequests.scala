@@ -56,7 +56,8 @@ object SubmissionRequests extends Configuration {
   val submissionPageUrl                              = "/submission"
   val jsonPayload                                    = Source.fromResource("data/submitFrontend.json").getLines().mkString
 
-  val sessionHeaders = Map("Authorization" -> "Bearer ${sessionToken}", "Content-Type" -> "application/json")
+  val sessionHeaders =
+    Map("Authorization" -> "Bearer ${sessionToken}", "Content-Type" -> "application/json")
 
   val navigateToClaimOnBehalfPage: HttpRequestBuilder                           =
     http("Navigate to claimOnBehalfPage")
