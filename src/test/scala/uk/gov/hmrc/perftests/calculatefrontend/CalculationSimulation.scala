@@ -27,9 +27,9 @@ import uk.gov.hmrc.perftests.calculatefrontend.requests.submission.SessionReques
 import uk.gov.hmrc.perftests.calculatefrontend.util.NINOGenerator
 import uk.gov.hmrc.perftests.calculatefrontend.requests.submission.SubmissionRequests._
 class CalculationSimulation extends PerformanceTestRunner {
-  val pension_scheme_name =
-    "pensionschemepensionschemepensionschemepensionschemepensionschemepensionschemepensionschemepe nsions"
+  val pension_scheme_name = "pensionSchemeName"
   val taxRef              = "00348916RX"
+
   setup("Basic-flow", "Basic user journey")
     .withRequests(
       navigateToSavingsStatementPage,
@@ -48,7 +48,9 @@ class CalculationSimulation extends PerformanceTestRunner {
       navigateToWhichYearsScottishTaxpayerPage,
       submitWhichYearsScottishTaxpayerPageConfirmation(),
       navigateToPayingIntoPublicPensionSchemePageUrlPage,
-      submitPayingIntoPublicPensionSchemePageUrlPageConfirmation("true"),
+      submitPayingIntoPublicPensionSchemePageUrlPageConfirmation("false"),
+      navigateWhenStopPayingIntoPublicPensionSchemePageUrlPage,
+      submitWhenStopPayingIntoPublicPensionSchemePageUrlPageConfirmation(1,7,2015),
       navigateToHaveDefinedContributionPensionPageUrlPage,
       submitHaveDefinedContributionPensionPageConfirmation("true"),
       navigateToHaveFlexiblyAccessedPensionUrlPage,
@@ -69,29 +71,36 @@ class CalculationSimulation extends PerformanceTestRunner {
     .withRequests(
       AA2016PreRequests.navigateToWhatYouWillNeedAaPage,
       AA2016PreRequests.navigateToMemberMoreThanOnePensionPage,
-      AA2016PreRequests.submitMemberMoreThanOnePensionConfirmation("true"),
+      AA2016PreRequests.submitMemberMoreThanOnePensionConfirmation("false"),
       AA2016PreRequests.navigateToFirstPensionSchemeDetailsPage,
       AA2016PreRequests.submitPensionFirstSchemeDetailsConfirmation("Scheme 1", "00348916RT"),
       AA2016PreRequests.navigateToFirstPensionSchemeInputAmountsPageUrlPage,
       AA2016PreRequests.submitFirstPensionSchemeInputAmountsPageUrlConfirmation("20000", "15000"),
       AA2016PreRequests.navigateToDidYouPayAChargePage,
-      AA2016PreRequests.submitDidYouPayAChargeConfirmation("false"),
-      AA2016PreRequests.navigateToAddAnotherSchemePage,
-      AA2016PreRequests.submitAddAnotherSchemeConfirmation("true"),
-      AA2016PreRequests.navigateToSecondPensionSchemeDetailsPage,
-      AA2016PreRequests.submitPensionSecondSchemeDetailsConfirmation("Scheme 2", "00348916RG"),
-      AA2016PreRequests.navigateToSecondPensionSchemeInputAmountsPageUrlPage,
-      AA2016PreRequests.submitPensionSecondSchemeInputAmountsPageUrlConfirmation("20000", "18000"),
-      AA2016PreRequests.navigateToDidYouPayAChargeSecondSchemePage,
-      AA2016PreRequests.submitDidYouPayAChargeSecondSchemeConfirmation("false"),
-      AA2016PreRequests.navigateToAddAnotherSchemeTwoPage,
-      AA2016PreRequests.submitAddAnotherSchemeTwoConfirmation("false"),
-      AA2016PreRequests.navigateToContributedOtherDbDcSchemePage,
-      AA2016PreRequests.submitContributedOtherDbDcSchemeConfirmation("true"),
-      AA2016PreRequests.navigateToWhichContributedDuringRemedyPeriodPage,
-      AA2016PreRequests.submitWhichContributedDuringRemedyPeriodConfirmation("definedBenefit"),
-      AA2016PreRequests.navigateToPiaForDbPensionPage,
-      AA2016PreRequests.submitPiaForDbPensionConfirmation("33000"),
+      AA2016PreRequests.submitDidYouPayAChargeConfirmation("true"),
+
+      AA2016PreRequests.navigateToWhoPaidAnnualAllowanceChargePage,
+      AA2016PreRequests.submitWhoPaidAnnualAllowanceChargeConfirmation("you"),
+      AA2016PreRequests.navigateToHowMuchYouPayChargePage,
+      AA2016PreRequests.submitHowMuchYouPayChargeConfirmation("3200"),
+
+        //TODO Reinstate subsequent periods requests.
+//      AA2016PreRequests.navigateToAddAnotherSchemePage,
+//      AA2016PreRequests.submitAddAnotherSchemeConfirmation("false"),
+//      AA2016PreRequests.navigateToSecondPensionSchemeDetailsPage,
+//      AA2016PreRequests.submitPensionSecondSchemeDetailsConfirmation("Scheme 2", "00348916RG"),
+//      AA2016PreRequests.navigateToSecondPensionSchemeInputAmountsPageUrlPage,
+//      AA2016PreRequests.submitPensionSecondSchemeInputAmountsPageUrlConfirmation("20000", "18000"),
+//      AA2016PreRequests.navigateToDidYouPayAChargeSecondSchemePage,
+//      AA2016PreRequests.submitDidYouPayAChargeSecondSchemeConfirmation("false"),
+//      AA2016PreRequests.navigateToAddAnotherSchemeTwoPage,
+//      AA2016PreRequests.submitAddAnotherSchemeTwoConfirmation("false"),
+//      AA2016PreRequests.navigateToContributedOtherDbDcSchemePage,
+//      AA2016PreRequests.submitContributedOtherDbDcSchemeConfirmation("true"),
+//      AA2016PreRequests.navigateToWhichContributedDuringRemedyPeriodPage,
+//      AA2016PreRequests.submitWhichContributedDuringRemedyPeriodConfirmation("definedBenefit"),
+//      AA2016PreRequests.navigateToPiaForDbPensionPage,
+//      AA2016PreRequests.submitPiaForDbPensionConfirmation("33000"),
       AA2016PreRequests.navigateToCheckYourAnswersPeriodPage,
       navigateToTaskListPageUrlPage
     )

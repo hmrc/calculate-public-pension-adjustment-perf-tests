@@ -24,16 +24,17 @@ import uk.gov.hmrc.perftests.calculatefrontend.Configuration
 object AAWorkFlowRequests extends Configuration {
 
   val calculateRoute: String                              = s"$calculationUrl/public-pension-adjustment"
-  val scottishTaxpayerFrom2016PageUrl: String             = "/scottish-taxpayer-from-2016"
-  val whichYearsScottishTaxpayerPageUrl: String           = "/which-years-scottish-taxpayer"
-  val payingIntoPublicPensionSchemePageUrl: String        = "/paying-into-public-pension-scheme"
-  val haveDefinedContributionPensionPageUrl: String       = "/have-defined-contribution-pension"
-  val haveFlexiblyAccessedPensionPageUrl: String          = "/have-flexibly-accessed-pension"
-  val payTaxChargeFrom20152016PageUrl: String             = "/pay-tax-charge-from2015-2016"
-  val piaPreRemedy2013PageUrl: String                     = "/pia-pre-remedy/2013"
-  val piaPreRemedy2014PageUrl: String                     = "/pia-pre-remedy/2014"
-  val piaPreRemedy2015PageUrl: String                     = "/pia-pre-remedy/2015"
-  val checkYourAnswersAnnualAllowanceSetupPageUrl: String = "/check-your-answers-annual-allowance-setup"
+  val scottishTaxpayerFrom2016PageUrl: String             = "/annual-allowance/scottish-taxpayer"
+  val whichYearsScottishTaxpayerPageUrl: String           = "/annual-allowance/scottish-taxpayer-years"
+  val payingIntoPublicPensionSchemePageUrl: String        = "/annual-allowance/paying-into-public-service-pension"
+  val whenStopPayingIntoPublicPensionSchemePageUrl: String        = "/annual-allowance/stopped-paying-into-public-service-pension"
+  val haveDefinedContributionPensionPageUrl: String       = "/annual-allowance/defined-contributions-scheme"
+  val haveFlexiblyAccessedPensionPageUrl: String          = "/annual-allowance/flexibly-accessed"
+  val payTaxChargeFrom20152016PageUrl: String             = "/annual-allowance/tax-charge-between-2015-2016"
+  val piaPreRemedy2013PageUrl: String                     = "/annual-allowance/pension-input-amount/2013"
+  val piaPreRemedy2014PageUrl: String                     = "/annual-allowance/pension-input-amount/2014"
+  val piaPreRemedy2015PageUrl: String                     = "/annual-allowance/pension-input-amount/2015"
+  val checkYourAnswersAnnualAllowanceSetupPageUrl: String = "/annual-allowance/setup-check-answers"
   val taskListPageUrl: String                             = "/task-list"
 
   val navigateToScottishTaxpayerFrom2016Page: HttpRequestBuilder =
@@ -76,6 +77,23 @@ object AAWorkFlowRequests extends Configuration {
       .formParam("csrfToken", "${csrfToken}")
       .formParam("value", value)
       .check(status.is(303))
+
+
+  val navigateWhenStopPayingIntoPublicPensionSchemePageUrlPage: HttpRequestBuilder =
+    http("Navigate to stopPayingIntoPublicPensionSchemePageUrl page")
+      .get(calculateRoute + whenStopPayingIntoPublicPensionSchemePageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitWhenStopPayingIntoPublicPensionSchemePageUrlPageConfirmation(day: Int, month: Int, year: Int): HttpRequestBuilder =
+    http(s"stopPayingIntoPublicPensionSchemePageUrl : $day - $month - $year")
+      .post(calculateRoute + whenStopPayingIntoPublicPensionSchemePageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value.day", day)
+      .formParam("value.month", month)
+      .formParam("value.year", year)
+      .check(status.is(303))
+
 
   val navigateToHaveDefinedContributionPensionPageUrlPage: HttpRequestBuilder =
     http("Navigate to haveDefinedContributionPension page")

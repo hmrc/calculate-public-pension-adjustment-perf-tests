@@ -23,48 +23,52 @@ import uk.gov.hmrc.perftests.calculatefrontend.Configuration
 
 object AA2016PreRequests extends Configuration {
 
-  val calculateRoute: String                            = s"$calculationUrl/public-pension-adjustment"
+  val calculateRoute: String                            = s"$calculationUrl/public-pension-adjustment/annual-allowance"
   val period2016Pre: String                             = "/2016-pre"
-  val scheme1: String                                   = "/0"
-  val scheme2: String                                   = "/1"
-  val whatYouWillNeedAaPageUrl: String                  = "/what-you-will-need-aa"
-  val memberMoreThanOnePensionPageUrl: String           = "/member-more-than-one-pension"
-  val pensionSchemeDetailsPageUrl: String               = "/pension-scheme-details"
-  val pensionSchemeInputAmountsPageUrl: String          = "/pension-scheme-input-amounts"
-  val didYouPayAChargePageUrl: String                   = "/did-you-pay-a-charge"
-  val addAnotherSchemePageUrl: String                   = "/add-another-scheme"
+  val scheme1: String                                   = "0"
+  val scheme2: String                                   = "1"
+  val whatYouWillNeedAaPageUrl: String                  = "/information"
+  val memberMoreThanOnePensionPageUrl: String           = "/multiple-schemes"
+  val pensionSchemeDetailsPageUrl: String               = "/scheme-name-reference"
+  val pensionSchemeInputAmountsPageUrl: String          = "/pension-input-amount"
+  val didYouPayAChargePageUrl: String                   = "/annual-allowance-charge"
+  val addAnotherSchemePageUrl: String                   = "/pension-scheme-summary"
   val contributedOtherDbDcSchemePageUrl: String         = "/contributed-other-db-dc-scheme"
   val whichContributedDuringRemedyPeriodPageUrl: String = "/which-contributed-during-remedy-period"
   val piaForDbPensionPageUrl: String                    = "/pia-for-db-pension"
-  val checkYourAnswersPeriodPageUrl: String             = "/check-your-answers-period"
+  val checkYourAnswersPeriodPageUrl: String             = "/check-answers"
+
+
+  val whoPaidChargePageUrl: String             = "/who-paid-charge"
+  val howMuchChargePageUrl: String             = "/charge-amount-you-paid"
 
   val navigateToWhatYouWillNeedAaPage: HttpRequestBuilder =
     http("Navigate to whatYouWillNeedAaPageUrl page " + period2016Pre)
-      .get(calculateRoute + whatYouWillNeedAaPageUrl + period2016Pre)
+      .get(calculateRoute + period2016Pre + whatYouWillNeedAaPageUrl)
       .check(status.is(200))
 
   val navigateToMemberMoreThanOnePensionPage: HttpRequestBuilder =
     http("Navigate to memberMoreThanOnePensionPageUrl page " + period2016Pre)
-      .get(calculateRoute + memberMoreThanOnePensionPageUrl + period2016Pre)
+      .get(calculateRoute +  period2016Pre + memberMoreThanOnePensionPageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def submitMemberMoreThanOnePensionConfirmation(value: String): HttpRequestBuilder =
     http("memberMoreThanOnePensionPageUrl : " + value)
-      .post(calculateRoute + memberMoreThanOnePensionPageUrl + period2016Pre)
+      .post(calculateRoute + period2016Pre + memberMoreThanOnePensionPageUrl)
       .formParam("csrfToken", "${csrfToken}")
       .formParam("value", value)
       .check(status.is(303))
 
   val navigateToFirstPensionSchemeDetailsPage: HttpRequestBuilder =
     http("Navigate to pensionSchemeDetails page " + period2016Pre + " Scheme " + scheme1)
-      .get(calculateRoute + pensionSchemeDetailsPageUrl + period2016Pre + scheme1)
+      .get(calculateRoute + period2016Pre + pensionSchemeDetailsPageUrl  + "/" + scheme1)
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def submitPensionFirstSchemeDetailsConfirmation(schemeName: String, schemeTaxRef: String): HttpRequestBuilder =
     http("pensionSchemeDetails : " + schemeName + " " + schemeTaxRef)
-      .post(calculateRoute + pensionSchemeDetailsPageUrl + period2016Pre + scheme1)
+      .post(calculateRoute + period2016Pre + pensionSchemeDetailsPageUrl + "/" + scheme1)
       .formParam("csrfToken", "${csrfToken}")
       .formParam("schemeName", schemeName)
       .formParam("schemeTaxRef", schemeTaxRef)
@@ -72,7 +76,7 @@ object AA2016PreRequests extends Configuration {
 
   val navigateToFirstPensionSchemeInputAmountsPageUrlPage: HttpRequestBuilder =
     http("Navigate to pensionSchemeInputAmounts page " + period2016Pre + " Scheme " + scheme1)
-      .get(calculateRoute + pensionSchemeInputAmountsPageUrl + period2016Pre + scheme1)
+      .get(calculateRoute + period2016Pre + "/pension-scheme-" + scheme1 + pensionSchemeInputAmountsPageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
@@ -81,7 +85,7 @@ object AA2016PreRequests extends Configuration {
     revisedPIA: String
   ): HttpRequestBuilder =
     http("pensionSchemeInputAmounts : " + originalPIA + " " + revisedPIA)
-      .post(calculateRoute + pensionSchemeInputAmountsPageUrl + period2016Pre + scheme1)
+      .post(calculateRoute + period2016Pre + "/pension-scheme-" + scheme1 + pensionSchemeInputAmountsPageUrl)
       .formParam("csrfToken", "${csrfToken}")
       .formParam("originalPIA", originalPIA)
       .formParam("revisedPIA", revisedPIA)
@@ -89,26 +93,52 @@ object AA2016PreRequests extends Configuration {
 
   val navigateToDidYouPayAChargePage: HttpRequestBuilder =
     http("Navigate to DidYouPayACharge page " + period2016Pre + " Scheme " + scheme1)
-      .get(calculateRoute + didYouPayAChargePageUrl + period2016Pre + scheme1)
+      .get(calculateRoute + period2016Pre + "/pension-scheme-" + scheme1 + didYouPayAChargePageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def submitDidYouPayAChargeConfirmation(value: String): HttpRequestBuilder =
     http("DidYouPayACharge : " + value)
-      .post(calculateRoute + didYouPayAChargePageUrl + period2016Pre + scheme1)
+      .post(calculateRoute + period2016Pre + "/pension-scheme-" + scheme1 + didYouPayAChargePageUrl)
       .formParam("csrfToken", "${csrfToken}")
       .formParam("value", value)
       .check(status.is(303))
 
   val navigateToAddAnotherSchemePage: HttpRequestBuilder =
     http("Navigate to AddAnotherScheme page " + period2016Pre + " Scheme " + scheme1)
-      .get(calculateRoute + addAnotherSchemePageUrl + period2016Pre + scheme1)
+      .get(calculateRoute + period2016Pre + "/pension-scheme-" + scheme1 + addAnotherSchemePageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
+  val navigateToWhoPaidAnnualAllowanceChargePage: HttpRequestBuilder =
+    http("Navigate to whoPaidAnnualAllowanceCharge page " + period2016Pre + " Scheme " + scheme1)
+      .get(calculateRoute + period2016Pre + "/pension-scheme-" + scheme1 + whoPaidChargePageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitWhoPaidAnnualAllowanceChargeConfirmation(value: String): HttpRequestBuilder =
+    http("whoPaidAnnualAllowanceCharge : " + value)
+      .post(calculateRoute + period2016Pre + "/pension-scheme-" + scheme1 + whoPaidChargePageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToHowMuchYouPayChargePage: HttpRequestBuilder =
+    http("Navigate to howMuchYouPayCharge page " + period2016Pre + " Scheme " + scheme1)
+      .get(calculateRoute + period2016Pre + "/pension-scheme-" + scheme1 + howMuchChargePageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitHowMuchYouPayChargeConfirmation(value: String): HttpRequestBuilder =
+    http("howMuchYouPayCharge : " + value)
+      .post(calculateRoute + period2016Pre + "/pension-scheme-" + scheme1 + howMuchChargePageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
   def submitAddAnotherSchemeConfirmation(value: String): HttpRequestBuilder =
     http("AddAnotherScheme : " + value)
-      .post(calculateRoute + addAnotherSchemePageUrl + period2016Pre + scheme1)
+      .post(calculateRoute + period2016Pre + "/pension-scheme-" + scheme1 + addAnotherSchemePageUrl)
       .formParam("csrfToken", "${csrfToken}")
       .formParam("value", value)
       .check(status.is(303))
@@ -211,6 +241,6 @@ object AA2016PreRequests extends Configuration {
 
   val navigateToCheckYourAnswersPeriodPage: HttpRequestBuilder =
     http("Navigate to checkYourAnswersPeriod page " + period2016Pre)
-      .get(calculateRoute + checkYourAnswersPeriodPageUrl + period2016Pre)
+      .get(calculateRoute + period2016Pre + checkYourAnswersPeriodPageUrl)
       .check(status.is(200))
 }

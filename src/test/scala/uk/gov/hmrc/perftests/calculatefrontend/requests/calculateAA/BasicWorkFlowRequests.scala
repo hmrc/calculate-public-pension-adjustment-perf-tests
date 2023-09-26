@@ -24,9 +24,9 @@ import uk.gov.hmrc.perftests.calculatefrontend.Configuration
 object BasicWorkFlowRequests extends Configuration {
 
   val calculateRoute: String                = s"$calculationUrl/public-pension-adjustment"
-  val savingsStatementPageUrl: String       = "/savings-statement"
-  val resubmittingAdjustmentPageUrl: String = "/resubmitting-adjustment"
-  val reportingChangePageUrl: String        = "/reporting-change"
+  val savingsStatementPageUrl: String       = "/pension-saving-statement"
+  val resubmittingAdjustmentPageUrl: String = "/change-previous-adjustment"
+  val reportingChangePageUrl: String        = "/charges"
   val checkYourAnswersPageUrl: String       = "/check-your-answers-setup"
 
   val navigateToSavingsStatementPage: HttpRequestBuilder =
