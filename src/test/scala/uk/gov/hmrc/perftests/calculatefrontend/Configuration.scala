@@ -16,9 +16,13 @@
 
 package uk.gov.hmrc.perftests.calculatefrontend
 
+import io.gatling.commons.validation.Validation
 import io.gatling.core.Predef._
+import io.gatling.core.check.{Check, CheckResult}
+import io.gatling.core.check.Check.PreparedCache
 import io.gatling.http.Predef._
-import io.gatling.http.check.HttpCheck
+import io.gatling.http.check.{HttpCheck, HttpCheckScope}
+import io.gatling.http.response.Response
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 trait Configuration extends ServicesConfiguration {
@@ -29,7 +33,7 @@ trait Configuration extends ServicesConfiguration {
   val submissionFrontendUrl: String       = baseUrlFor("submit-stub")
   val finalSubmissionBackendUrl: String  = baseUrlFor("final-submit-stub")
   private val csrfTokenPattern: String    = """<input type="hidden" name="csrfToken"\s+value="([^"]+)"""
-  private val sessionTokenPattern: String = """Bearer\s([^,]+)"""
+  private val sessionTokenPattern: String = """Bearer\s([^,<]+)"""
 
   def saveCsrfToken: HttpCheck =
     regex(_ => csrfTokenPattern).saveAs("csrfToken")
