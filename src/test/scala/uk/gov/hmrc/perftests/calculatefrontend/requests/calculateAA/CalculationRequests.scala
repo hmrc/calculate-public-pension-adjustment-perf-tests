@@ -37,8 +37,7 @@ object CalculationRequests extends Configuration {
       .check(status.is(200))
       .check(css(expectedText1).find.exists)
       .check(css(expectedText2).find.exists)
-      // TODO Reinstate date check on calculation page.
-//      .check(css(expectedText3).find.exists)
+      .check(css(expectedText3).find.exists)
       .check(saveCsrfToken)
 
   def submitCalculationResultConfirmation(): HttpRequestBuilder =
