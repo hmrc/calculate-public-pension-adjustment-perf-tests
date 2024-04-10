@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import scala.util.Random
 
 object NINOGenerator {
   val nino = {
-    val firstTwoLetters = "ABCEHJKLMPRSTWXY"
+    val firstTwoLetters = "ABCEHJKLMPRSTWXS"
     val letterPart      = Random.shuffle(firstTwoLetters.toList).take(2).mkString
     val numberPart      = Random.nextInt(999999).toString.reverse.padTo(6, '0').reverse
     val lastLetters     = "ABCD"

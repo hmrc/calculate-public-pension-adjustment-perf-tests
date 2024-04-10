@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,10 @@ object SubmissionRequests extends Configuration {
   val jsonPayload                                    = Source.fromResource("data/submitFrontend.json").getLines().mkString
 
   val sessionHeaders =
-    Map("Authorization" -> "Bearer ${sessionToken}", "Content-Type" -> "application/json")
+    Map(
+      "Authorization" -> "Bearer ${bearerToken}",
+      "Content-Type"  -> "application/json"
+    )
 
   val navigateToClaimOnBehalfPage: HttpRequestBuilder                           =
     http("Navigate to claimOnBehalfPage")
@@ -146,7 +149,7 @@ object SubmissionRequests extends Configuration {
     http("submit to TheirUTRP : ")
       .post(submitRoute + theirUTRPageUrl)
       .formParam("csrfToken", "${csrfToken}")
-      .formParam("value", "1234567890")
+      .formParam("value", "1234567891")
       .check(status.is(303))
 
   val navigateToTheirResidencePage: HttpRequestBuilder                        =
@@ -248,33 +251,33 @@ object SubmissionRequests extends Configuration {
 
   val navigateToLegacyPensionSchemeReferencePage: HttpRequestBuilder =
     http("Navigate to legacyPensionSchemeReferencePage")
-      .get(submitRoute + "/00348916RT" + legacyPensionSchemeReferencePageUrl)
+      .get(submitRoute + "/00348916RU" + legacyPensionSchemeReferencePageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def submitLegacyPensionSchemeReferencePageConfirmation(): HttpRequestBuilder =
     http("submit to legacyPensionSchemeReferencePage ")
-      .post(submitRoute + "/00348916RT" + legacyPensionSchemeReferencePageUrl)
+      .post(submitRoute + "/00348916RU" + legacyPensionSchemeReferencePageUrl)
       .formParam("csrfToken", "${csrfToken}")
-      .formParam("value", "00348916RT")
+      .formParam("value", "00348916RU")
       .check(status.is(303))
 
   val navigateToReformPensionSchemeReferencePageUrlPage: HttpRequestBuilder =
     http("Navigate to reformPensionSchemeReferencePage")
-      .get(submitRoute + "/00348916RT" + reformPensionSchemeReferencePageUrl)
+      .get(submitRoute + "/00348916RU" + reformPensionSchemeReferencePageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def submitReformPensionSchemeReferencePageUrlConfirmation(): HttpRequestBuilder =
     http("submit to reformPensionSchemeReferencePage ")
-      .post(submitRoute + "/00348916RT" + reformPensionSchemeReferencePageUrl)
+      .post(submitRoute + "/00348916RU" + reformPensionSchemeReferencePageUrl)
       .formParam("value", "TAX00000629RTED")
       .formParam("csrfToken", "${csrfToken}")
       .check(status.is(303))
 
   val navigateToLegacyPensionScheme2ReferencePage: HttpRequestBuilder =
     http("Navigate to legacyPensionSchemeReferencePage")
-      .get(submitRoute + "/00348916RT" + legacyPensionSchemeReferencePageUrl)
+      .get(submitRoute + "/00348916RG" + legacyPensionSchemeReferencePageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
@@ -300,26 +303,26 @@ object SubmissionRequests extends Configuration {
 
   val navigateToLegacyPensionScheme3ReferencePage: HttpRequestBuilder =
     http("Navigate to legacyPensionSchemeReferencePage")
-      .get(submitRoute + "/00348916RF" + legacyPensionSchemeReferencePageUrl)
+      .get(submitRoute + "/00348916RX" + legacyPensionSchemeReferencePageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def submitLegacyPensionScheme3ReferencePageConfirmation(): HttpRequestBuilder =
     http("submit to legacyPensionSchemeReferencePage ")
-      .post(submitRoute + "/00348916RF" + legacyPensionSchemeReferencePageUrl)
-      .formParam("value", "00348916RF")
+      .post(submitRoute + "/00348916RX" + legacyPensionSchemeReferencePageUrl)
+      .formParam("value", "00348916RX")
       .formParam("csrfToken", "${csrfToken}")
       .check(status.is(303))
 
   val navigateToReformPensionScheme3ReferencePageUrlPage: HttpRequestBuilder =
     http("Navigate to reformPensionSchemeReferencePage")
-      .get(submitRoute + "/00348916RF" + reformPensionSchemeReferencePageUrl)
+      .get(submitRoute + "/00348916RX" + reformPensionSchemeReferencePageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def submitReformPensionScheme3ReferencePageUrlConfirmation(): HttpRequestBuilder =
     http("submit to reformPensionSchemeReferencePage ")
-      .post(submitRoute + "/00348916RF" + reformPensionSchemeReferencePageUrl)
+      .post(submitRoute + "/00348916RX" + reformPensionSchemeReferencePageUrl)
       .formParam("value", "TAX00000629RTED")
       .formParam("csrfToken", "${csrfToken}")
       .check(status.is(303))
@@ -338,12 +341,24 @@ object SubmissionRequests extends Configuration {
       .check(status.is(303))
 
   val navigateToTaxReliefAmountPage: HttpRequestBuilder =
-    http("Navigate to whichPensionSchemeWillPay")
-      .get(submitRoute + whichPensionSchemeWillPayTaxRelief)
+    http("Navigate to TaxReliefAmount")
+      .get(submitRoute + taxReliefAmountPageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def submitTaxReliefAmountPageUrlConfirmation(): HttpRequestBuilder =
+    http("submit to TaxReliefAmount ")
+      .post(submitRoute + taxReliefAmountPageUrl)
+      .formParam("value", "101010")
+      .formParam("csrfToken", "${csrfToken}")
+      .check(status.is(303))
+
+  val navigateToWhichPensionSchemeWillPayPage: HttpRequestBuilder              =
+    http("Navigate to whichPensionSchemeWillPay")
+      .get(submitRoute + whichPensionSchemeWillPayTaxRelief)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+  def submitWhichPensionSchemeWillPayPageUrlConfirmation(): HttpRequestBuilder =
     http("submit to whichPensionSchemeWillPay ")
       .post(submitRoute + whichPensionSchemeWillPayTaxRelief)
       .formParam("value", "Scheme 2 / 00348916RG")
