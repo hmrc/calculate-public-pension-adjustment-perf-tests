@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import scala.io.Source
 
 object AuthRequests extends Configuration {
 
-  val authWizardUrl: String        = s"$authUrl/auth-login-stub/gg-sign-in?"
+  val authWizardUrl: String        = s"$authUrl/auth-login-stub/gg-sign-in"
   val submissionUrl: String        = s"$sessionUrl/calculate-public-pension-adjustment/submission"
   val redirectionUrl: String       =
     s"$submissionFrontendUrl/submit-public-pension-adjustment/landing-page?submissionUniqueId="
@@ -39,7 +39,25 @@ object AuthRequests extends Configuration {
       .body(StringBody(jsonPayload))
       .check(status.is(202))
       .check(jsonPath("$.uniqueId").saveAs("submissionUniqueId"))
-  def loginForSubmission(): HttpRequestBuilder    =
+      .silent
+
+  def getSubmission(): HttpRequestBuilder =
+    http("GG sign in")
+      .post(authWizardUrl)
+      .formParam("redirectionUrl", authWizardSessionUrl)
+      .formParam("excludeGnapToken", "true")
+      .formParam("credentialStrength", "strong")
+      .formParam("confidenceLevel", "250")
+      .formParam("affinityGroup", "Individual")
+      .formParam("email", "user@test.com")
+      .formParam("credentialRole", "User")
+      .formParam("nino", "AA000000A")
+      .formParam("itmp.givenName", "Lari")
+      .formParam("authorityId", "")
+      .check(status.is(303))
+      .silent
+
+  def loginForSubmission(): HttpRequestBuilder =
     http("Log in with submissionUniqueId")
       .post(authWizardUrl)
       .formParam("authorityId", "")
@@ -100,9 +118,19 @@ object AuthRequests extends Configuration {
       .formParam("itmp.address.countryName", "")
       .formParam("itmp.address.countryCode", "")
       .check(status.is(303))
+      .silent
 
   val navigateToAuthPage: HttpRequestBuilder =
     http("Navigate to auth page ")
       .get(redirectionUrl + "${submissionUniqueId}")
       .check(status.is(303))
+      .silent
+
+  def getSubmissionBearerToken(): HttpRequestBuilder =
+    http("getSubmission id")
+      .get(authWizardSessionUrl)
+      .check(status.is(200))
+      .check(saveBearerToken)
+      .silent
+
 }

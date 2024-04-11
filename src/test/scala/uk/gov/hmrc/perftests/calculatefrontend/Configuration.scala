@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,11 +34,15 @@ trait Configuration extends ServicesConfiguration {
   val finalSubmissionBackendUrl: String   = baseUrlFor("final-submit-stub")
   private val csrfTokenPattern: String    = """<input type="hidden" name="csrfToken"\s+value="([^"]+)"""
   private val sessionTokenPattern: String = """Bearer\s([^,<]+)"""
+  private val bearerTokenPattern: String  = """Bearer\s([^,<]+)"""
 
   def saveCsrfToken: HttpCheck =
     regex(_ => csrfTokenPattern).saveAs("csrfToken")
 
   def saveSessionToken: HttpCheck =
     regex(_ => sessionTokenPattern).saveAs("sessionToken")
+
+  def saveBearerToken: HttpCheck =
+    regex(_ => bearerTokenPattern).saveAs("bearerToken")
 
 }
