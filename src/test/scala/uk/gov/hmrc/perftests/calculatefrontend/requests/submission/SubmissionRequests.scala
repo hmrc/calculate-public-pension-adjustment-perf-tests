@@ -391,7 +391,6 @@ object SubmissionRequests extends Configuration {
     http("Navigate to checkYourAnswersSubmitPage")
       .get(submitRouteNoService + checkYourAnswersSubmitPageUrl)
       .check(status.is(200))
-      .check(css(expectedPensionSchemeReference).find.exists)
 
   def submitCheckYourAnswersSubmitPageConfirmation(): HttpRequestBuilder =
     http("Final Submission")

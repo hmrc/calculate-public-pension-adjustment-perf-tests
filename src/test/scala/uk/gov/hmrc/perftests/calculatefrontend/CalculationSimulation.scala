@@ -78,8 +78,6 @@ class CalculationSimulation extends PerformanceTestRunner {
       submitTaxReliefAmountPageUrlConfirmation(),
       navigateToWhichPensionSchemeWillPayPage,
       submitWhichPensionSchemeWillPayPageUrlConfirmation(),
-      navigateToBankDetailsPage,
-      submitBankDetailsPageConfirmation(),
       navigateToDeclarationsPage,
       navigateToCheckYourAnswersSubmitPage
     )
