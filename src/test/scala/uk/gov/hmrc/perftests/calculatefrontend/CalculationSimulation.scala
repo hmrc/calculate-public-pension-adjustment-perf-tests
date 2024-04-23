@@ -24,8 +24,10 @@ import uk.gov.hmrc.perftests.calculatefrontend.util.NINOGenerator
 class CalculationSimulation extends PerformanceTestRunner {
 
   setup("Auth-wizard", "Authorization")
+    .withActions(uuidFeeder.actionBuilders: _*)
     .withRequests(
       getSubmissionUniqueId(),
+      submitUserAnswers(),
       loginForSubmission(),
       navigateToAuthPage
     )

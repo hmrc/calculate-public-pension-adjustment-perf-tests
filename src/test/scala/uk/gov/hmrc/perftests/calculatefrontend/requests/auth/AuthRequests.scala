@@ -17,28 +17,50 @@
 package uk.gov.hmrc.perftests.calculatefrontend.requests.auth
 
 import io.gatling.core.Predef._
+import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.calculatefrontend.Configuration
 
+import java.util.UUID
 import scala.io.Source
 
 object AuthRequests extends Configuration {
 
   val authWizardUrl: String        = s"$authUrl/auth-login-stub/gg-sign-in"
   val submissionUrl: String        = s"$sessionUrl/calculate-public-pension-adjustment/submission"
+  val userAnswersUrl: String       = s"$sessionUrl/calculate-public-pension-adjustment/test-only/user-answers"
   val redirectionUrl: String       =
     s"$submissionFrontendUrl/submit-public-pension-adjustment/landing-page?submissionUniqueId="
-  val jsonPayload                  = Source.fromResource("data/calculateFrontend.json").getLines().mkString
+  val submissionCompletedRequest   = Source.fromResource("data/calculateFrontend.json").getLines().mkString
+  val jsonPayload                  = submissionCompletedRequest
+  val userAnswersCompletedRequest  = Source.fromResource("data/userAnswers.json").getLines().mkString
+  val userAnswersPayload           = userAnswersCompletedRequest
   val authWizardSessionUrl: String = s"$authUrl/auth-login-stub/session"
 
-  def getSubmissionUniqueId(): HttpRequestBuilder =
+  def main2(): String = {
+    val uniqueID = UUID.randomUUID().toString
+    uniqueID
+  }
+
+  val uuidIdentifier: Iterator[Map[String, String]] =
+    Iterator.continually(Map("uniqueId" -> UUID.randomUUID().toString))
+  def uuidFeeder: ChainBuilder                      = feed(uuidIdentifier)
+  def getSubmissionUniqueId(): HttpRequestBuilder   =
     http("get submission id")
       .post(submissionUrl)
       .header("Content-Type", "application/json")
       .body(StringBody(jsonPayload))
       .check(status.is(202))
       .check(jsonPath("$.uniqueId").saveAs("submissionUniqueId"))
+      .silent
+
+  def submitUserAnswers(): HttpRequestBuilder =
+    http("post User Answers")
+      .post(userAnswersUrl)
+      .header("Content-Type", "application/json")
+      .body(StringBody(userAnswersPayload))
+      .check(status.is(204))
       .silent
 
   def getSubmission(): HttpRequestBuilder =
