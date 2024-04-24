@@ -37,6 +37,15 @@ object AAWorkFlowRequests extends Configuration {
   val piaPreRemedy2015PageUrl: String                      = "/annual-allowance/pension-input-amount/2015"
   val checkYourAnswersAnnualAllowanceSetupPageUrl: String  = "/annual-allowance/setup-check-answers"
   val taskListPageUrl: String                              = "/task-list"
+  val calculationResultPageUrl: String                     = "/calculation-result"
+  val payTaxChargeFrom20102011PageUrl: String              = "/annual-allowance/registered/2011"
+  val payTaxChargeFrom20112012PageUrl: String              = "/annual-allowance/registered/2012"
+  val payTaxChargeFrom20122013PageUrl: String              = "/annual-allowance/registered/2013"
+  val payTaxChargeFrom20132014PageUrl: String              = "/annual-allowance/registered/2014"
+  val payTaxChargeFrom20142015PageUrl: String              = "/annual-allowance/registered/2015"
+  val payTaxChargeBetween20142015PageUrl: String           = "/annual-allowance/tax-charge-between-2014-2015"
+  val piaPreRemedy2011PageUrl: String                      = "/annual-allowance/pension-input-amount/2011"
+  val piaPreRemedy2012PageUrl: String                      = "/annual-allowance/pension-input-amount/2012"
 
   val navigateToScottishTaxpayerFrom2016Page: HttpRequestBuilder =
     http("Navigate to ScottishTaxpayerFrom2016 page")
@@ -185,4 +194,114 @@ object AAWorkFlowRequests extends Configuration {
     http("Navigate to taskListPageUrl page")
       .get(calculateRoute + taskListPageUrl)
       .check(status.is(200))
+
+  val navigateToCalculationResultPageUrlPage: HttpRequestBuilder =
+    http("Navigate to calculationResultPageUrl page")
+      .get(calculateRoute + calculationResultPageUrl)
+      .check(status.is(200))
+
+  val navigateToPayTaxChargeBetween20142015UrlPage: HttpRequestBuilder =
+    http("Navigate to payTaxChargeBetween20142015 page")
+      .get(calculateRoute + payTaxChargeBetween20142015PageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitPayTaxChargeBetween20142015Confirmation(value: String): HttpRequestBuilder =
+    http("payTaxChargeBetween20142015 : " + value)
+      .post(calculateRoute + payTaxChargeBetween20142015PageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToPayTaxChargeFrom20142015UrlPage: HttpRequestBuilder =
+    http("Navigate to payTaxChargeFrom20142015 page")
+      .get(calculateRoute + payTaxChargeFrom20142015PageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitPayTaxChargeFrom20142015Confirmation(value: String): HttpRequestBuilder =
+    http("payTaxChargeFrom20142015 : " + value)
+      .post(calculateRoute + payTaxChargeFrom20142015PageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToPayTaxChargeFrom20132014UrlPage: HttpRequestBuilder =
+    http("Navigate to payTaxChargeFrom20132014 page")
+      .get(calculateRoute + payTaxChargeFrom20132014PageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitPayTaxChargeFrom20132014Confirmation(value: String): HttpRequestBuilder =
+    http("payTaxChargeFrom20132014 : " + value)
+      .post(calculateRoute + payTaxChargeFrom20132014PageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToPayTaxChargeFrom20122013UrlPage: HttpRequestBuilder =
+    http("Navigate to payTaxChargeFrom20122013 page")
+      .get(calculateRoute + payTaxChargeFrom20122013PageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitPayTaxChargeFrom20122013Confirmation(value: String): HttpRequestBuilder =
+    http("payTaxChargeFrom20122013 : " + value)
+      .post(calculateRoute + payTaxChargeFrom20122013PageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToPayTaxChargeFrom20112012UrlPage: HttpRequestBuilder =
+    http("Navigate to payTaxChargeFrom20112012 page")
+      .get(calculateRoute + payTaxChargeFrom20112012PageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitPayTaxChargeFrom20112012Confirmation(value: String): HttpRequestBuilder =
+    http("payTaxChargeFrom20112012 : " + value)
+      .post(calculateRoute + payTaxChargeFrom20112012PageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToPayTaxChargeFrom20102011UrlPage: HttpRequestBuilder =
+    http("Navigate to payTaxChargeFrom20102011 page")
+      .get(calculateRoute + payTaxChargeFrom20102011PageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitPayTaxChargeFrom20102011Confirmation(value: String): HttpRequestBuilder =
+    http("payTaxChargeFrom20102011 : " + value)
+      .post(calculateRoute + payTaxChargeFrom20102011PageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToPiaPreRemedy2011Page: HttpRequestBuilder =
+    http("Navigate to piaPreRemedy2011 page")
+      .get(calculateRoute + piaPreRemedy2011PageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitPiaPreRemedy2011PageConfirmation(value: String): HttpRequestBuilder =
+    http("piaPreRemedy2011 : " + value)
+      .post(calculateRoute + piaPreRemedy2011PageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToPiaPreRemedy2012Page: HttpRequestBuilder =
+    http("Navigate to piaPreRemedy2012 page")
+      .get(calculateRoute + piaPreRemedy2012PageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitPiaPreRemedy2012PageConfirmation(value: String): HttpRequestBuilder =
+    http("piaPreRemedy2012 : " + value)
+      .post(calculateRoute + piaPreRemedy2012PageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
 }

@@ -35,12 +35,13 @@ object BasicWorkFlowRequests extends Configuration {
       .check(status.is(200))
       .check(saveCsrfToken)
 
-  def submitRssReceivedConfirmation(value: String): HttpRequestBuilder =
+  def submitRssReceivedConfirmation(value: String): HttpRequestBuilder = {
     http("Rss received : " + value)
       .post(calculateRoute + savingsStatementPageUrl)
       .formParam("csrfToken", "${csrfToken}")
       .formParam("value", value)
       .check(status.is(303))
+  }
 
   val navigateToResubmittingAdjustmentPage: HttpRequestBuilder =
     http("Navigate to Resubmitting Adjustment page")
