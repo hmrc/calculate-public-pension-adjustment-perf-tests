@@ -26,9 +26,9 @@ import scala.io.Source
 
 object ShowCalculationRequests extends Configuration {
 
-  val finalCalculationRoute: String = s"$finalShowCalculationUrl/calculate-public-pension-adjustment"
-  val showCalculationPageUrl = "/show-calculation"
-  val jsonPayload            = Source.fromResource("data/showCalculation.json").getLines().mkString
+  val finalCalculationRoute: String = s"$sessionUrl/calculate-public-pension-adjustment"
+  val showCalculationPageUrl        = "/show-calculation"
+  val jsonPayload                   = Source.fromResource("data/showCalculation.json").getLines().mkString
 
   val sessionHeaders =
     Map(
