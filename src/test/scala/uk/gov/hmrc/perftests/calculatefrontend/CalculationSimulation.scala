@@ -114,9 +114,7 @@ class CalculationSimulation extends PerformanceTestRunner {
       periodRequests2016.submitPiaForDbPensionConfirmation("40000"),
       periodRequests2016.navigateToTotalIncomePageUrlPage,
       periodRequests2016.submitTotalIncomePageUrlConfirmation("60000"),
-      periodRequests2016.navigateToCheckYourAnswersPeriodPage,
-      navigateToTaskListPageUrlPage,
-      navigateToCalculationResultPageUrlPage
+      navigateToTaskListPageUrlPage
     )
 
   setup("Annual-Allowance-2017", "2017 calculation")
@@ -154,13 +152,12 @@ class CalculationSimulation extends PerformanceTestRunner {
       periodRequests2017.submitThresholdIncomePageConfirmation("false"),
       periodRequests2017.navigateToTotalIncomePageUrlPage,
       periodRequests2017.submitTotalIncomePageUrlConfirmation("60000"),
-      periodRequests2017.navigateToCheckYourAnswersPeriodPage,
-      navigateToTaskListPageUrlPage,
-      navigateToCalculationResultPageUrlPage
+      navigateToTaskListPageUrlPage
     )
 
   setup("Show-Calculation", "Calculation submission")
     .withRequests(
+      navigateToCalculationResultPageUrlPage,
       verifyShowCalculationResults()
     )
 
