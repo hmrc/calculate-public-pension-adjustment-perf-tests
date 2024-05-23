@@ -83,13 +83,11 @@ class AAPeriodRequests(periodYear: String) extends Configuration {
       .check(saveCsrfToken)
 
   def submitFirstPensionSchemeInputAmountsPageUrlConfirmation(
-    originalPIA: String,
     revisedPIA: String
   ): HttpRequestBuilder =
-    http("pensionSchemeInputAmounts : " + originalPIA + " " + revisedPIA)
+    http("pensionSchemeInputAmounts : " + revisedPIA)
       .post(calculateRoute + period + "/pension-scheme-" + scheme1 + pensionSchemeInputAmountsPageUrl)
       .formParam("csrfToken", "${csrfToken}")
-      .formParam("originalPIA", originalPIA)
       .formParam("revisedPIA", revisedPIA)
       .check(status.is(303))
 
@@ -166,13 +164,11 @@ class AAPeriodRequests(periodYear: String) extends Configuration {
       .check(saveCsrfToken)
 
   def submitPensionSecondSchemeInputAmountsPageUrlConfirmation(
-    originalPIA: String,
     revisedPIA: String
   ): HttpRequestBuilder =
-    http("pensionSchemeInputAmounts : " + originalPIA + " " + revisedPIA)
+    http("pensionSchemeInputAmounts : " + revisedPIA)
       .post(calculateRoute + period + "/pension-scheme-" + scheme2 + pensionSchemeInputAmountsPageUrl)
       .formParam("csrfToken", "${csrfToken}")
-      .formParam("originalPIA", originalPIA)
       .formParam("revisedPIA", revisedPIA)
       .check(status.is(303))
 
