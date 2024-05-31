@@ -15,14 +15,12 @@
           {
             "name": "Scheme 1",
             "pensionSchemeTaxReference": "00348916RU",
-            "originalPensionInputAmount": 50000,
             "revisedPensionInputAmount": 40000,
             "chargePaidByScheme": 0
           },
           {
             "name": "Scheme 2",
             "pensionSchemeTaxReference": "00348916RG",
-            "originalPensionInputAmount": 38000,
             "revisedPensionInputAmount": 33000,
             "chargePaidByScheme": 0
           }
@@ -42,14 +40,12 @@
           {
             "name": "Scheme 1",
             "pensionSchemeTaxReference": "00348916RU",
-            "originalPensionInputAmount": 28000,
             "revisedPensionInputAmount": 25000,
             "chargePaidByScheme": 0
           },
           {
             "name": "Scheme 2",
             "pensionSchemeTaxReference": "00348916RG",
-            "originalPensionInputAmount": 15000,
             "revisedPensionInputAmount": 13000,
             "chargePaidByScheme": 0
           }
@@ -67,14 +63,12 @@
           {
             "name": "Scheme 1",
             "pensionSchemeTaxReference": "00348916RU",
-            "originalPensionInputAmount": 0,
             "revisedPensionInputAmount": 0,
             "chargePaidByScheme": 0
           },
           {
             "name": "Scheme 2",
             "pensionSchemeTaxReference": "00348916RG",
-            "originalPensionInputAmount": 30000,
             "revisedPensionInputAmount": 25000,
             "chargePaidByScheme": 0
           }
@@ -92,14 +86,12 @@
           {
             "name": "Scheme 1",
             "pensionSchemeTaxReference": "00348916RU",
-            "originalPensionInputAmount": 0,
             "revisedPensionInputAmount": 0,
             "chargePaidByScheme": 0
           },
           {
             "name": "Scheme 2",
             "pensionSchemeTaxReference": "00348916RG",
-            "originalPensionInputAmount": 48000,
             "revisedPensionInputAmount": 43000,
             "chargePaidByScheme": 0
           }
@@ -117,14 +109,12 @@
           {
             "name": "Scheme 1",
             "pensionSchemeTaxReference": "00348916RU",
-            "originalPensionInputAmount": 0,
             "revisedPensionInputAmount": 0,
             "chargePaidByScheme": 0
           },
           {
             "name": "Scheme 2",
             "pensionSchemeTaxReference": "00348916RG",
-            "originalPensionInputAmount": 42000,
             "revisedPensionInputAmount": 40000,
             "chargePaidByScheme": 0
           }
@@ -142,14 +132,12 @@
           {
             "name": "Scheme 1",
             "pensionSchemeTaxReference": "00348916RU",
-            "originalPensionInputAmount": 0,
             "revisedPensionInputAmount": 0,
             "chargePaidByScheme": 0
           },
           {
             "name": "Scheme 2",
             "pensionSchemeTaxReference": "00348916RG",
-            "originalPensionInputAmount": 42000,
             "revisedPensionInputAmount": 40000,
             "chargePaidByScheme": 0
           }
@@ -167,14 +155,12 @@
           {
             "name": "Scheme 1",
             "pensionSchemeTaxReference": "00348916RU",
-            "originalPensionInputAmount": 0,
             "revisedPensionInputAmount": 0,
             "chargePaidByScheme": 0
           },
           {
             "name": "Scheme 2",
             "pensionSchemeTaxReference": "00348916RG",
-            "originalPensionInputAmount": 42000,
             "revisedPensionInputAmount": 40000,
             "chargePaidByScheme": 0
           }
@@ -192,14 +178,12 @@
           {
             "name": "Scheme 1",
             "pensionSchemeTaxReference": "00348916RU",
-            "originalPensionInputAmount": 0,
             "revisedPensionInputAmount": 0,
             "chargePaidByScheme": 0
           },
           {
             "name": "Scheme 2",
             "pensionSchemeTaxReference": "00348916RG",
-            "originalPensionInputAmount": 42000,
             "revisedPensionInputAmount": 40000,
             "chargePaidByScheme": 0
           }

@@ -19,8 +19,8 @@ package uk.gov.hmrc.perftests.calculatefrontend
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.calculatefrontend.requests.auth.AuthRequests._
 import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.AAPeriodRequests
-import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.AAWorkFlowRequests.{navigateToCalculationResultPageUrlPage, navigateToCheckYourAnswersAnnualAllowanceSetupPage, navigateToHaveDefinedContributionPensionPageUrlPage, navigateToHaveFlexiblyAccessedPensionUrlPage, navigateToPayTaxChargeBetween20142015UrlPage, navigateToPayTaxChargeFrom20102011UrlPage, navigateToPayTaxChargeFrom20112012UrlPage, navigateToPayTaxChargeFrom20122013UrlPage, navigateToPayTaxChargeFrom20132014UrlPage, navigateToPayTaxChargeFrom20142015UrlPage, navigateToPayTaxChargeFrom20152016UrlPage, navigateToPayingIntoPublicPensionSchemePageUrlPage, navigateToPiaPreRemedy2011Page, navigateToPiaPreRemedy2012Page, navigateToPiaPreRemedy2013Page, navigateToPiaPreRemedy2014Page, navigateToPiaPreRemedy2015Page, navigateToScottishTaxpayerFrom2016Page, navigateToTaskListPageUrlPage, navigateToWhichYearsScottishTaxpayerPage, submitHaveDefinedContributionPensionPageConfirmation, submitHaveFlexiblyAccessedPensionPageConfirmation, submitPayTaxChargeBetween20142015Confirmation, submitPayTaxChargeFrom20102011Confirmation, submitPayTaxChargeFrom20112012Confirmation, submitPayTaxChargeFrom20122013Confirmation, submitPayTaxChargeFrom20132014Confirmation, submitPayTaxChargeFrom20142015Confirmation, submitPayTaxChargeFrom20152016Confirmation, submitPayingIntoPublicPensionSchemePageUrlPageConfirmation, submitPiaPreRemedy2011PageConfirmation, submitPiaPreRemedy2012PageConfirmation, submitPiaPreRemedy2013PageConfirmation, submitPiaPreRemedy2014PageConfirmation, submitPiaPreRemedy2015PageConfirmation, submitScottishTaxpayerFrom2016Confirmation, submitWhichYearsScottishTaxpayerPageConfirmation}
-import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.BasicWorkFlowRequests.{navigateToCheckYourAnswersPage, navigateToReportingChangePage, navigateToResubmittingAdjustmentPage, navigateToSavingsStatementPage, submitReportingChangeConfirmation, submitResubmittingConfirmation, submitRssReceivedConfirmation}
+import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.AAWorkFlowRequests._
+import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.BasicWorkFlowRequests._
 import uk.gov.hmrc.perftests.calculatefrontend.requests.showCalculation.ShowCalculationRequests.verifyShowCalculationResults
 import uk.gov.hmrc.perftests.calculatefrontend.requests.submission.SubmissionRequests._
 import uk.gov.hmrc.perftests.calculatefrontend.util.NINOGenerator
@@ -89,7 +89,7 @@ class CalculationSimulation extends PerformanceTestRunner {
       periodRequests2016.navigateToWhichSchemeDetailsPage,
       periodRequests2016.submitWhichSchemeDetailsConfirmation("00348916RS"),
       periodRequests2016.navigateToFirstPensionSchemeInputAmountsPageUrlPage,
-      periodRequests2016.submitFirstPensionSchemeInputAmountsPageUrlConfirmation("30000", "25000"),
+      periodRequests2016.submitFirstPensionSchemeInputAmountsPageUrlConfirmation("25000"),
       periodRequests2016.navigateToDidYouPayAChargePage,
       periodRequests2016.submitDidYouPayAChargeConfirmation("true"),
       periodRequests2016.navigateToWhoPaidAnnualAllowanceChargePage,
@@ -101,7 +101,7 @@ class CalculationSimulation extends PerformanceTestRunner {
       periodRequests2016.navigateToWhichSecondSchemeDetailsPage,
       periodRequests2016.submitWhichSecondSchemeDetailsConfirmation("00348916RG"),
       periodRequests2016.navigateToSecondPensionSchemeInputAmountsPageUrlPage,
-      periodRequests2016.submitPensionSecondSchemeInputAmountsPageUrlConfirmation("18000", "15000"),
+      periodRequests2016.submitPensionSecondSchemeInputAmountsPageUrlConfirmation("15000"),
       periodRequests2016.navigateToDidYouPayAChargeSecondSchemePage,
       periodRequests2016.submitDidYouPayAChargeSecondSchemeConfirmation("false"),
       periodRequests2016.navigateToAddAnotherSchemeTwoPage,
@@ -125,7 +125,7 @@ class CalculationSimulation extends PerformanceTestRunner {
       periodRequests2017.navigateToWhichSchemeDetailsPage,
       periodRequests2017.submitWhichSchemeDetailsConfirmation("00348916RB"),
       periodRequests2017.navigateToFirstPensionSchemeInputAmountsPageUrlPage,
-      periodRequests2017.submitFirstPensionSchemeInputAmountsPageUrlConfirmation("28000", "25000"),
+      periodRequests2017.submitFirstPensionSchemeInputAmountsPageUrlConfirmation("25000"),
       periodRequests2017.navigateToDidYouPayAChargePage,
       periodRequests2017.submitDidYouPayAChargeConfirmation("true"),
       periodRequests2017.navigateToWhoPaidAnnualAllowanceChargePage,
@@ -137,7 +137,7 @@ class CalculationSimulation extends PerformanceTestRunner {
       periodRequests2017.navigateToWhichSecondSchemeDetailsPage,
       periodRequests2017.submitWhichSecondSchemeDetailsConfirmation("00348916RG"),
       periodRequests2017.navigateToSecondPensionSchemeInputAmountsPageUrlPage,
-      periodRequests2017.submitPensionSecondSchemeInputAmountsPageUrlConfirmation("15000", "13000"),
+      periodRequests2017.submitPensionSecondSchemeInputAmountsPageUrlConfirmation("13000"),
       periodRequests2017.navigateToDidYouPayAChargeSecondSchemePage,
       periodRequests2017.submitDidYouPayAChargeSecondSchemeConfirmation("false"),
       periodRequests2017.navigateToAddAnotherSchemeTwoPage,
