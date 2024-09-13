@@ -41,18 +41,23 @@ object LTARequests extends Configuration {
   val newInternationalEnhancementReference: String = "/lifetime-allowance/new-international-enhancement-reference"
   val newPensionCreditReference: String            = "/lifetime-allowance/new-pension-credit-reference"
 
-  val ltaCharge20152023PageUrl: String       = "/lifetime-allowance/charge-2015-2023"
-  val howExcessWasPaidPageUrl: String        = "/lifetime-allowance/excess-paid"
-  val valueOfLumpSumPageUrl: String          = "/lifetime-allowance/value-of-lump-sum"
-  val valueOfAnnualPaymentPageUrl: String    = "/lifetime-allowance/value-of-annual-payment"
-  val whoPaidLtaChargePageUrl: String        = "/lifetime-allowance/who-paid-charge"
-  val schemePaidLtaChargePageUrl: String     = "/lifetime-allowance/scheme-paid-charge-amount"
-  val quarterChargeWasPaidPageUrl: String    = "/lifetime-allowance/quarter-charge-was-paid"
-  val yearChargeWasPaidPageUrl: String       = "/lifetime-allowance/year-charge-was-paid"
-  val newExcessPaidPageUrl: String           = "/lifetime-allowance/new-excess-paid"
-  val newValueOfLumpSumPageUrl: String       = "/lifetime-allowance/new-value-of-lump-sum"
-  val newValueOfAnnualPaymentPageUrl: String = "/lifetime-allowance/new-value-of-annual-payment"
-  val whoPaidExtraChargePageUrl: String      = "/lifetime-allowance/who-paid-extra-charge"
+  val ltaCharge20152023PageUrl: String            = "/lifetime-allowance/charge-2015-2023"
+  val howExcessWasPaidPageUrl: String             = "/lifetime-allowance/excess-paid"
+  val valueOfLumpSumPageUrl: String               = "/lifetime-allowance/value-of-lump-sum"
+  val valueOfAnnualPaymentPageUrl: String         = "/lifetime-allowance/value-of-annual-payment"
+  val whoPaidLtaChargePageUrl: String             = "/lifetime-allowance/who-paid-charge"
+  val schemePaidLtaChargePageUrl: String          = "/lifetime-allowance/scheme-paid-charge-amount"
+  val quarterChargeWasPaidPageUrl: String         = "/lifetime-allowance/quarter-charge-was-paid"
+  val yearChargeWasPaidPageUrl: String            = "/lifetime-allowance/year-charge-was-paid"
+  val newExcessPaidPageUrl: String                = "/lifetime-allowance/new-excess-paid"
+  val newValueOfLumpSumPageUrl: String            = "/lifetime-allowance/new-value-of-lump-sum"
+  val newValueOfAnnualPaymentPageUrl: String      = "/lifetime-allowance/new-value-of-annual-payment"
+  val whoPaidExtraChargePageUrl: String           = "/lifetime-allowance/who-paid-extra-charge"
+  val lTAChargeUrl: String                        = "/triage-journey/LTA-charge"
+  val lifeTimeAllowancePercentageChange: String   = "/lifetime-allowance/lifetime-allowance-percentage-change"
+  val lifeTimeAllowancePercentageIncrease: String = "/lifetime-allowance/lifetime-allowance-percentage-increase"
+  val lifeTimeAllowanceNewCharge: String          = "/lifetime-allowance/lifetime-allowance-new-charge"
+  val otherSchemeLTANotification: String          = "/triage-journey/other-scheme-LTA-notification"
 
   val navigateToHadBenefitCrystallisationEventPage: HttpRequestBuilder =
     http("Navigate to benefit-crystallisation-event page ")
@@ -67,14 +72,92 @@ object LTARequests extends Configuration {
       .formParam("value", value)
       .check(status.is(303))
 
+  val navigateToLTAChargePage: HttpRequestBuilder =
+    http("Navigate to LTA charge page ")
+      .get(calculateRoute + lTAChargeUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitLTACharge(value: String): HttpRequestBuilder =
+    http("submit LTA charge page : " + value)
+      .post(calculateRoute + lTAChargeUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToLifeTimeAllowancePercentageChangePage: HttpRequestBuilder =
+    http("Navigate to LifetimeAllowancePercentageChange page ")
+      .get(calculateRoute + lifeTimeAllowancePercentageChange)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitLifeTimeAllowancePercentageChange(value: String): HttpRequestBuilder =
+    http("LifeTimeAllowancePercentageChange : " + value)
+      .post(calculateRoute + lifeTimeAllowancePercentageChange)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToLifeTimeAllowancePercentageIncreasePage: HttpRequestBuilder =
+    http("Navigate to LifeTimeAllowancePercentageIncrease page ")
+      .get(calculateRoute + lifeTimeAllowancePercentageIncrease)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitLifeTimeAllowancePercentageIncrease(value: String): HttpRequestBuilder =
+    http("LifeTimeAllowancePercentageIncrease : " + value)
+      .post(calculateRoute + lifeTimeAllowancePercentageIncrease)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToLifeTimeAllowanceNewChargePage: HttpRequestBuilder =
+    http("Navigate to LifeTimeAllowanceNewCharge page ")
+      .get(calculateRoute + lifeTimeAllowanceNewCharge)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitLifeTimeAllowanceNewCharge(value: String): HttpRequestBuilder =
+    http("LifeTimeAllowanceNewCharge : " + value)
+      .post(calculateRoute + lifeTimeAllowanceNewCharge)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToMoreThanOneBCEPage: HttpRequestBuilder =
+    http("Navigate to MoreThanOneBCE page ")
+      .get(calculateRoute + moreThanOneBenefitCrystallisationEventPageUrl)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitMoreThanOneBCE(value: String): HttpRequestBuilder =
+    http("MoreThanOneBCE : " + value)
+      .post(calculateRoute + moreThanOneBenefitCrystallisationEventPageUrl)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
+  val navigateToOtherSchemeLTANotificationPage: HttpRequestBuilder =
+    http("Navigate to OtherSchemeLTANotification page ")
+      .get(calculateRoute + otherSchemeLTANotification)
+      .check(status.is(200))
+      .check(saveCsrfToken)
+
+  def submitOtherSchemeLTANotification(value: String): HttpRequestBuilder =
+    http("OtherSchemeLTANotification : " + value)
+      .post(calculateRoute + otherSchemeLTANotification)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", value)
+      .check(status.is(303))
+
   val navigateToDateOfBenefitCrystallisationEventPage: HttpRequestBuilder =
-    http("Navigate to benefit-crystallisation-event-date page ")
+    http("Navigate to DateOfBenefitCrystallisationEvent ")
       .get(calculateRoute + dateOfBenefitCrystallisationEventPageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def submitDateOfBenefitCrystallisationEventConfirmation(): HttpRequestBuilder =
-    http("benefit-crystallisation-event-date ")
+    http("DateOfBenefitCrystallisationEvent ")
       .post(calculateRoute + dateOfBenefitCrystallisationEventPageUrl)
       .formParam("csrfToken", "${csrfToken}")
       .formParam("value.day", "25")

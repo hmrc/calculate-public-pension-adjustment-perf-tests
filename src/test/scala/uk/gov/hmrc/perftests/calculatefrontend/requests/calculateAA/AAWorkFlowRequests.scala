@@ -43,7 +43,7 @@ object AAWorkFlowRequests extends Configuration {
   val payTaxChargeFrom20122013PageUrl: String              = "/annual-allowance/registered/2013"
   val payTaxChargeFrom20132014PageUrl: String              = "/annual-allowance/registered/2014"
   val payTaxChargeFrom20142015PageUrl: String              = "/annual-allowance/registered/2015"
-  val payTaxChargeBetween20142015PageUrl: String           = "/annual-allowance/tax-charge-between-2014-2015"
+  val payTaxCharge20142015PageUrl: String                  = "/annual-allowance/tax-charge-2014-2015"
   val piaPreRemedy2011PageUrl: String                      = "/annual-allowance/pension-input-amount/2011"
   val piaPreRemedy2012PageUrl: String                      = "/annual-allowance/pension-input-amount/2012"
 
@@ -200,15 +200,15 @@ object AAWorkFlowRequests extends Configuration {
       .get(calculateRoute + calculationResultPageUrl)
       .check(status.is(200))
 
-  val navigateToPayTaxChargeBetween20142015UrlPage: HttpRequestBuilder =
+  val navigateToPayTaxCharge20142015UrlPage: HttpRequestBuilder =
     http("Navigate to payTaxChargeBetween20142015 page")
-      .get(calculateRoute + payTaxChargeBetween20142015PageUrl)
+      .get(calculateRoute + payTaxCharge20142015PageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
 
-  def submitPayTaxChargeBetween20142015Confirmation(value: String): HttpRequestBuilder =
+  def submitPayTaxCharge20142015Confirmation(value: String): HttpRequestBuilder =
     http("payTaxChargeBetween20142015 : " + value)
-      .post(calculateRoute + payTaxChargeBetween20142015PageUrl)
+      .post(calculateRoute + payTaxCharge20142015PageUrl)
       .formParam("csrfToken", "${csrfToken}")
       .formParam("value", value)
       .check(status.is(303))
