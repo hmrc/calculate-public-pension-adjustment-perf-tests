@@ -2,232 +2,91 @@
   "resubmission": {
     "isResubmission": false
   },
+  "setup": {
+    "annualAllowanceSetup": {
+      "savingsStatement": true,
+      "pensionProtectedMember": false,
+      "hadAACharge": false,
+      "contributionRefunds": false,
+      "maybePIAIncrease": "idk",
+      "maybePIAUnchangedOrDecreased": "yes",
+      "pIAAboveAnnualAllowanceIn2023": false,
+      "netIncomeAbove190KIn2023": false,
+      "flexibleAccessDcScheme": true,
+      "contribution4000ToDirectContributionScheme": true
+    }
+  },
   "annualAllowance": {
-    "scottishTaxYears": [
-      "2021",
-      "2019",
-      "2017"
-    ],
+    "scottishTaxYears": [],
     "taxYears": [
       {
-        "pensionInputAmount": 73000,
+        "pensionInputAmount": 40000,
         "taxYearSchemes": [
           {
-            "name": "Scheme 1",
-            "pensionSchemeTaxReference": "00348916RU",
+            "name": "NHS",
+            "pensionSchemeTaxReference": "11123456BC",
             "revisedPensionInputAmount": 40000,
-            "chargePaidByScheme": 0
-          },
-          {
-            "name": "Scheme 2",
-            "pensionSchemeTaxReference": "00348916RG",
-            "revisedPensionInputAmount": 33000,
-            "chargePaidByScheme": 0
+            "chargePaidByScheme": 0,
+            "revisedPensionInput2016PostAmount": 2000
           }
         ],
-        "totalIncome": 60000,
-        "chargePaidByMember": 3200,
-        "period": "2016"
-      },
-      {
-        "pensionInputAmount": 38000,
-        "income": {
-          "incomeAboveThreshold": false
-        },
-        "totalIncome": 60000,
-        "chargePaidByMember": 1200,
-        "taxYearSchemes": [
-          {
-            "name": "Scheme 1",
-            "pensionSchemeTaxReference": "00348916RU",
-            "revisedPensionInputAmount": 25000,
-            "chargePaidByScheme": 0
-          },
-          {
-            "name": "Scheme 2",
-            "pensionSchemeTaxReference": "00348916RG",
-            "revisedPensionInputAmount": 13000,
-            "chargePaidByScheme": 0
-          }
-        ],
-        "period": "2017"
-      },
-      {
-        "pensionInputAmount": 25000,
-        "income": {
-          "incomeAboveThreshold": false
-        },
         "totalIncome": 60000,
         "chargePaidByMember": 0,
-        "taxYearSchemes": [
-          {
-            "name": "Scheme 1",
-            "pensionSchemeTaxReference": "00348916RU",
-            "revisedPensionInputAmount": 0,
-            "chargePaidByScheme": 0
-          },
-          {
-            "name": "Scheme 2",
-            "pensionSchemeTaxReference": "00348916RG",
-            "revisedPensionInputAmount": 25000,
-            "chargePaidByScheme": 0
-          }
-        ],
-        "period": "2018"
+        "period": "2016",
+        "incomeSubJourney": {
+          "rASContributionsAmount": 2000,
+          "giftAidAmount": 3000,
+          "personalAllowanceAmount": 2000,
+          "blindPersonsAllowanceAmount": 2290
+        },
+        "pensionInput2016PostAmount": 2000
       },
       {
-        "pensionInputAmount": 43000,
-        "income": {
-          "incomeAboveThreshold": false
-        },
-        "totalIncome": 60000,
-        "chargePaidByMember": 3280,
+        "pensionInputAmount": 32000,
         "taxYearSchemes": [
           {
-            "name": "Scheme 1",
-            "pensionSchemeTaxReference": "00348916RU",
-            "revisedPensionInputAmount": 0,
+            "name": "NHS",
+            "pensionSchemeTaxReference": "11123456BC",
+            "revisedPensionInputAmount": 8000,
             "chargePaidByScheme": 0
           },
           {
-            "name": "Scheme 2",
-            "pensionSchemeTaxReference": "00348916RG",
-            "revisedPensionInputAmount": 43000,
-            "chargePaidByScheme": 0
-          }
-        ],
-        "period": "2019"
-      },
-      {
-        "pensionInputAmount": 40000,
-        "income": {
-          "incomeAboveThreshold": false
-        },
-        "totalIncome": 60000,
-        "chargePaidByMember": 800,
-        "taxYearSchemes": [
-          {
-            "name": "Scheme 1",
-            "pensionSchemeTaxReference": "00348916RU",
-            "revisedPensionInputAmount": 0,
+            "name": "MyCSP",
+            "pensionSchemeTaxReference": "00123456CC",
+            "revisedPensionInputAmount": 8000,
             "chargePaidByScheme": 0
           },
           {
-            "name": "Scheme 2",
-            "pensionSchemeTaxReference": "00348916RG",
-            "revisedPensionInputAmount": 40000,
-            "chargePaidByScheme": 0
-          }
-        ],
-        "period": "2020"
-      },
-      {
-        "pensionInputAmount": 40000,
-        "income": {
-          "incomeAboveThreshold": false
-        },
-        "totalIncome": 60000,
-        "chargePaidByMember": 800,
-        "taxYearSchemes": [
-          {
-            "name": "Scheme 1",
-            "pensionSchemeTaxReference": "00348916RU",
-            "revisedPensionInputAmount": 0,
+            "name": "Army",
+            "pensionSchemeTaxReference": "00123456DD",
+            "revisedPensionInputAmount": 8000,
             "chargePaidByScheme": 0
           },
           {
-            "name": "Scheme 2",
-            "pensionSchemeTaxReference": "00348916RG",
-            "revisedPensionInputAmount": 40000,
+            "name": "Fire",
+            "pensionSchemeTaxReference": "00123456EE",
+            "revisedPensionInputAmount": 8000,
             "chargePaidByScheme": 0
           }
         ],
-        "period": "2021"
-      },
-      {
-        "pensionInputAmount": 40000,
-        "income": {
-          "incomeAboveThreshold": false
+        "totalIncome": 300000,
+        "chargePaidByMember": 0,
+        "period": "2017",
+        "incomeSubJourney": {
+          "salarySacrificeAmount": 1000,
+          "flexibleRemunerationAmount": 2000,
+          "lumpsumDeathBenefitsAmount": 6000,
+          "isAboveThreshold": true,
+          "personalContributionsAmount": 3000,
+          "giftAidAmount": 3000,
+          "personalAllowanceAmount": 2130,
+          "blindPersonsAllowanceAmount": 2290
         },
-        "totalIncome": 60000,
-        "chargePaidByMember": 800,
-        "taxYearSchemes": [
-          {
-            "name": "Scheme 1",
-            "pensionSchemeTaxReference": "00348916RU",
-            "revisedPensionInputAmount": 0,
-            "chargePaidByScheme": 0
-          },
-          {
-            "name": "Scheme 2",
-            "pensionSchemeTaxReference": "00348916RG",
-            "revisedPensionInputAmount": 40000,
-            "chargePaidByScheme": 0
-          }
-        ],
-        "period": "2022"
-      },
-      {
-        "pensionInputAmount": 40000,
         "income": {
-          "incomeAboveThreshold": false
-        },
-        "totalIncome": 60000,
-        "chargePaidByMember": 800,
-        "taxYearSchemes": [
-          {
-            "name": "Scheme 1",
-            "pensionSchemeTaxReference": "00348916RU",
-            "revisedPensionInputAmount": 0,
-            "chargePaidByScheme": 0
-          },
-          {
-            "name": "Scheme 2",
-            "pensionSchemeTaxReference": "00348916RG",
-            "revisedPensionInputAmount": 40000,
-            "chargePaidByScheme": 0
-          }
-        ],
-        "period": "2023"
+          "incomeAboveThreshold": true,
+          "adjustedIncome": 326000
+        }
       }
     ]
-  },
-  "lifeTimeAllowance": {
-    "benefitCrystallisationEventFlag": true,
-    "benefitCrystallisationEventDate": "2017-06-25",
-    "changeInLifetimeAllowancePercentageInformedFlag": true,
-    "changeInTaxCharge": "newCharge",
-    "lifetimeAllowanceProtectionOrEnhancements": "enhancements",
-    "protectionTypeEnhancementChanged": "both",
-    "newProtectionTypeOrEnhancement": "enhancedProtection",
-    "newProtectionTypeOrEnhancementReference": "R41AB5678TR2335",
-    "previousLifetimeAllowanceChargeFlag": true,
-    "previousLifetimeAllowanceChargePaymentMethod": "both",
-    "previousLifetimeAllowanceChargePaidBy": "pensionScheme",
-    "previousLifetimeAllowanceChargeSchemeNameAndTaxRef": {
-      "name": "Tensionschemepensionschemepensionschemepensionschemepensionschemepensionschemepensionschemepe nsions",
-      "taxRef": "00348916RX"
-    },
-    "newLifetimeAllowanceChargeWillBePaidBy": "pensionScheme",
-    "newLifetimeAllowanceChargeSchemeNameAndTaxRef": {
-      "name": "Tensionschemepensionschemepensionschemepensionschemepensionschemepensionschemepensionschemepe nsions",
-      "taxRef": "00348916RX"
-    },
-    "newLifeTimeAllowanceAdditions": {
-      "multipleBenefitCrystallisationEventFlag": false,
-      "enhancementType": "both",
-      "internationalEnhancementReference": "1234567890ASDFG",
-      "pensionCreditReference": "1234567890ZXCVB",
-      "newEnhancementType": "both",
-      "newInternationalEnhancementReference": "1234567891QWERT",
-      "newPensionCreditReference": "1234567123QAZXS",
-      "lumpSumValue": 1000,
-      "annualPaymentValue": 3000,
-      "quarterChargePaid": "janToApr",
-      "yearChargePaid": "2021To2022",
-      "newExcessLifetimeAllowancePaid": "both",
-      "newLumpSumValue": 2300,
-      "newAnnualPaymentValue": 2000
-    }
   }
 }

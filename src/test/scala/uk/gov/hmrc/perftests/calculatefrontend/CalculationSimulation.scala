@@ -264,79 +264,71 @@ class CalculationSimulation extends PerformanceTestRunner {
       navigateToTaskListPageUrlPage
     )
 
-//  setup("Show-Calculation", "Calculation submission")
-//    .withRequests(
-//      navigateToCalculationResultPageUrlPage,
-//      verifyShowCalculationResults()
-//    )
+  setup("Show-Calculation", "Calculation submission")
+    .withRequests(
+      navigateToCalculationResultPageUrlPage,
+      verifyShowCalculationResults()
+    )
 
-//  setup("Auth-wizard", "Authorization")
-//    .withActions(uuidFeeder.actionBuilders: _*)
-//    .withRequests(
-//      getSubmissionUniqueId(),
-//      submitUserAnswers(),
-//      loginForSubmission(),
-//      navigateToAuthPage
-//    )
+  setup("Auth-wizard", "Authorization")
+    .withActions(uuidFeeder.actionBuilders: _*)
+    .withRequests(
+      getSubmissionUniqueId(),
+      submitUserAnswers(),
+      loginForSubmission(),
+      navigateToAuthPage
+    )
 
-//  setup("Submission-route", "Submission-route")
-//    .withRequests(
-//      navigateToClaimOnBehalfPage,
-//      submitClaimOnBehalfPageUrlConfirmation("true"),
-//      navigateToStatusOfUserPage,
-//      submitStatusOfUserPageConfirmation("deputyship"),
-//      navigateToTheirNamePage,
-//      submitTheirNamePageConfirmation("ABC BCDEFGHIJK"),
-//      navigateToTheirDobPage,
-//      submitTheirDobPageConfirmation(),
-//      navigateToTheirDateOfDeathPage,
-//      submitTheirDateOfDeathPageConfirmation(),
-//      navigateToTheirNinoPage,
-//      submitTheirNinoPageUrlConfirmation(NINOGenerator.nino),
-//      navigateToTheirUTRPage,
-//      submitTheirUTRPConfirmation(),
-//      navigateToTheirResidencePage,
-//      submitTheirResidencePageConfirmation("true"),
-//      navigateToTheirUKAddressPage,
-//      submitTheirUKAddressPageConfirmation(),
-//      navigateToAlternativeNamePage,
-//      submitAlternativeNamePageConfirmation("false"),
-//      navigateToEnterAlternativeNamePage,
-//      submitEnterAlternativeNamePageConfirmation("ABC BCDEFGH"),
-//      navigateToContactNumberPage,
-//      submitContactNumberPageConfirmation(),
-//      navigateToResidencePage,
-//      submitResidencePagConfirmation("false"),
-//      navigateToInternationalAddressPagePage,
-//      submitInternationalAddressPageConfirmation(),
-//      navigateToLegacyPensionSchemeReferencePage,
-//      submitLegacyPensionSchemeReferencePageConfirmation(),
-//      navigateToReformPensionSchemeReferencePageUrlPage,
-//      submitReformPensionSchemeReferencePageUrlConfirmation(),
-//      navigateToLegacyPensionScheme2ReferencePage,
-//      submitLegacyPensionScheme2ReferencePageConfirmation(),
-//      navigateToReformPensionScheme2ReferencePageUrlPage,
-//      submitReformPensionScheme2ReferencePageUrlConfirmation(),
-//      navigateToLegacyPensionScheme3ReferencePage,
-//      submitLegacyPensionScheme3ReferencePageConfirmation(),
-//      navigateToReformPensionScheme3ReferencePageUrlPage,
-//      submitReformPensionScheme3ReferencePageUrlConfirmation(),
-//      navigateToClaimingAdditionalTaxRateReliefPageUrlPage,
-//      submitClaimingAdditionalTaxRateReliefPageUrlConfirmation(),
-//      navigateToTaxReliefAmountPage,
-//      submitTaxReliefAmountPageUrlConfirmation(),
-//      navigateToWhichPensionSchemeWillPayPage,
-//      submitWhichPensionSchemeWillPayPageUrlConfirmation(),
-//      navigateToDeclarationsPage,
-//      navigateToCheckYourAnswersSubmitPage
-//    )
+  setup("Submission-route", "Submission-route")
+    .withRequests(
+      navigateToClaimOnBehalfPage,
+      submitClaimOnBehalfPageUrlConfirmation("true"),
+      navigateToStatusOfUserPage,
+      submitStatusOfUserPageConfirmation("deputyship"),
+      navigateToTheirNamePage,
+      submitTheirNamePageConfirmation("ABC BCDEFGHIJK"),
+      navigateToTheirDobPage,
+      submitTheirDobPageConfirmation(),
+      navigateToTheirDateOfDeathPage,
+      submitTheirDateOfDeathPageConfirmation(),
+      navigateToTheirNinoPage,
+      submitTheirNinoPageUrlConfirmation(NINOGenerator.nino),
+      navigateToTheirUTRPage,
+      submitTheirUTRPConfirmation(),
+      navigateToTheirResidencePage,
+      submitTheirResidencePageConfirmation("true"),
+      navigateToTheirUKAddressPage,
+      submitTheirUKAddressPageConfirmation(),
+      navigateToAlternativeNamePage,
+      submitAlternativeNamePageConfirmation("false"),
+      navigateToEnterAlternativeNamePage,
+      submitEnterAlternativeNamePageConfirmation("ABC BCDEFGH"),
+      navigateToContactNumberPage,
+      submitContactNumberPageConfirmation(),
+      navigateToResidencePage,
+      submitResidencePagConfirmation("false"),
+      navigateToInternationalAddressPagePage,
+      submitInternationalAddressPageConfirmation(),
+      navigateToLegacyPensionSchemeReferencePage,
+      submitLegacyPensionSchemeReferencePageConfirmation(),
+      navigateToReformPensionSchemeReferencePageUrlPage,
+      submitReformPensionSchemeReferencePageUrlConfirmation(),
+      navigateToClaimingAdditionalTaxRateReliefPageUrlPage,
+      submitClaimingAdditionalTaxRateReliefPageUrlConfirmation(),
+      navigateToTaxReliefAmountPage,
+      submitTaxReliefAmountPageUrlConfirmation(),
+      navigateToWhichPensionSchemeWillPayPage,
+      submitWhichPensionSchemeWillPayPageUrlConfirmation(),
+      navigateToCheckYourAnswersSubmitPage,
+      navigateToDeclarationsPage
+    )
 
-//  setup("Final-Submission", "Final-Submission")
-//    .withRequests(
-//      getSubmission(),
-//      getSubmissionBearerToken(),
-//      submitCheckYourAnswersSubmitPageConfirmation()
-//    )
+  setup("Final-Submission", "Final-Submission")
+    .withRequests(
+      getSubmission(),
+      getSubmissionBearerToken(),
+      submitCheckYourAnswersSubmitPageConfirmation()
+    )
 
   runSimulation()
 }

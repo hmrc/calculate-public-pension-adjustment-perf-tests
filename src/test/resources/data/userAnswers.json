@@ -1,5 +1,5 @@
 {
-  "_id": "Int-${uniqueId}",
+  "_id": "calculationSessionId",
   "data": {
     "savingsStatement": true,
     "navigation": {
@@ -27,7 +27,6 @@
                 "schemeTaxRef": "00348916RO"
               },
               "PensionSchemeInput2016preAmounts": {
-                "originalPIA": 1,
                 "revisedPIA": 2
               },
               "payACharge": true,
@@ -40,7 +39,7 @@
       }
     }
   },
-  "uniqueId": "${uniqueId}",
+  "uniqueId": "calculationUniqueId",
   "lastUpdated": {
     "$date": {
       "$numberLong": "1713000152270"
