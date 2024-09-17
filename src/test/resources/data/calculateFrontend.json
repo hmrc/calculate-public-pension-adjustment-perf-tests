@@ -511,6 +511,6 @@
       }
     ]
   },
-  "userId": "calculationSessionId",
-  "uniqueId": "calculationUniqueId"
+  "userId": "${nino}",
+  "uniqueId": "${uniqueId}"
 }

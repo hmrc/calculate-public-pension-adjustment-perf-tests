@@ -19,8 +19,8 @@ package uk.gov.hmrc.perftests.calculatefrontend.util
 import scala.util.Random
 
 object NINOGenerator {
-  val nino = {
-    val firstTwoLetters = "ABCEHJKLMPRSTWXS"
+  def generateNINO: String = {
+    val firstTwoLetters = "ABCEHJKLMPRSTWXY"
     val letterPart      = Random.shuffle(firstTwoLetters.toList).take(2).mkString
     val numberPart      = Random.nextInt(999999).toString.reverse.padTo(6, '0').reverse
     val lastLetters     = "ABCD"

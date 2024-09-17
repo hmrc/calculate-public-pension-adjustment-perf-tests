@@ -13,7 +13,9 @@
     <!--<logger name="io.gatling.http.engine.response" level="TRACE" />-->
 
     <!-- Sets the performance-test-runner log level-->
-    <logger name="uk.gov.hmrc.performance" level="INFO"/>
+    <!--   <logger name="uk.gov.hmrc.performance" level="TRACE"/>-->
+    <!-- <logger name="io.gatling.http.ahc" level="TRACE" />
+     <logger name="io.gatling.http.response" level="TRACE" />-->
 
     <root level="WARN">
         <appender-ref ref="CONSOLE"/>

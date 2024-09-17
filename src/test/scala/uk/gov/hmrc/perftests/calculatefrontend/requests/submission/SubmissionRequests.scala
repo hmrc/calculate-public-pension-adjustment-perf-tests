@@ -63,11 +63,17 @@ object SubmissionRequests extends Configuration {
       "Content-Type"  -> "application/json"
     )
 
-  val navigateToClaimOnBehalfPage: HttpRequestBuilder                           =
+  val navigateToSubmissionInforPage: HttpRequestBuilder =
+    http("Navigate to submission info page ")
+      .get(submitRouteNoService + "/submission-info")
+      .check(status.is(200))
+
+  val navigateToClaimOnBehalfPage: HttpRequestBuilder =
     http("Navigate to claimOnBehalfPage")
       .get(submitRoute + claimOnBehalfPageUrl)
       .check(status.is(200))
       .check(saveCsrfToken)
+
   def submitClaimOnBehalfPageUrlConfirmation(value: String): HttpRequestBuilder =
     http("submit to claimOnBehalfPage : " + value)
       .post(submitRoute + claimOnBehalfPageUrl)
