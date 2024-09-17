@@ -19,7 +19,7 @@ package uk.gov.hmrc.perftests.calculatefrontend
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.calculatefrontend.requests.auth.AuthRequests._
 import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.AAPeriodRequests
-import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.AAWorkFlowRequests.{navigateToTaskListPageUrlPage, _}
+import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.AAWorkFlowRequests._
 import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateAA.BasicWorkFlowRequests._
 import uk.gov.hmrc.perftests.calculatefrontend.requests.calculateLTA.LTARequests._
 import uk.gov.hmrc.perftests.calculatefrontend.requests.showCalculation.ShowCalculationRequests.verifyShowCalculationResults
@@ -270,17 +270,19 @@ class CalculationSimulation extends PerformanceTestRunner {
       verifyShowCalculationResults()
     )
 
-  setup("Auth-wizard", "Authorization")
-    .withActions(uuidFeeder.actionBuilders: _*)
+  setup("Submission-landing", "Landing to submission")
+    .withActions(calculationUniqueID.actionBuilders: _*)
+    .withActions(calculationSessionId.actionBuilders: _*)
     .withRequests(
       getSubmissionUniqueId(),
       submitUserAnswers(),
       loginForSubmission(),
-      navigateToAuthPage
+      navigateToSubmissionLandingPage
     )
 
   setup("Submission-route", "Submission-route")
     .withRequests(
+      navigateToSubmissionInforPage,
       navigateToClaimOnBehalfPage,
       submitClaimOnBehalfPageUrlConfirmation("true"),
       navigateToStatusOfUserPage,
@@ -292,7 +294,7 @@ class CalculationSimulation extends PerformanceTestRunner {
       navigateToTheirDateOfDeathPage,
       submitTheirDateOfDeathPageConfirmation(),
       navigateToTheirNinoPage,
-      submitTheirNinoPageUrlConfirmation(NINOGenerator.nino),
+      submitTheirNinoPageUrlConfirmation(NINOGenerator.generateNINO),
       navigateToTheirUTRPage,
       submitTheirUTRPConfirmation(),
       navigateToTheirResidencePage,

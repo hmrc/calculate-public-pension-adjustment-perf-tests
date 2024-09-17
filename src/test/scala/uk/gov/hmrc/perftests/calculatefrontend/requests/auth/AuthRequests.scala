@@ -21,6 +21,8 @@ import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.calculatefrontend.Configuration
+import uk.gov.hmrc.perftests.calculatefrontend.requests.submission.SubmissionRequests.submissionFrontendUrl
+import uk.gov.hmrc.perftests.calculatefrontend.util.NINOGenerator
 
 import java.util.UUID
 import scala.io.Source
@@ -37,16 +39,28 @@ object AuthRequests extends Configuration {
   val userAnswersCompletedRequest  = Source.fromResource("data/userAnswers.json").getLines().mkString
   val userAnswersPayload           = userAnswersCompletedRequest
   val authWizardSessionUrl: String = s"$authUrl/auth-login-stub/session"
-
-  def main2(): String = {
-    val uniqueID = UUID.randomUUID().toString
-    uniqueID
-  }
+  val submitRouteNoService: String = s"$submissionFrontendUrl/submit-public-pension-adjustment"
+  val submitRoute: String          = s"$submissionFrontendUrl/submit-public-pension-adjustment/submission-service"
+  val finalSubmitRoute: String     = s"$finalSubmissionBackendUrl/submit-public-pension-adjustment"
+  val claimOnBehalfPageUrl: String = "/submitting-on-behalf-someone-else"
 
   val uuidIdentifier: Iterator[Map[String, String]] =
     Iterator.continually(Map("uniqueId" -> UUID.randomUUID().toString))
-  def uuidFeeder: ChainBuilder                      = feed(uuidIdentifier)
-  def getSubmissionUniqueId(): HttpRequestBuilder   =
+
+  val ninoGenerator: Iterator[Map[String, String]] =
+    Iterator.continually(Map("nino" -> NINOGenerator.generateNINO))
+
+  def calculationUniqueID: ChainBuilder = feed(uuidIdentifier)
+
+  def calculationSessionId: ChainBuilder = feed(ninoGenerator)
+
+  def landingToSubmission(): HttpRequestBuilder = {
+    getSubmissionUniqueId()
+    submitUserAnswers()
+    loginForSubmission()
+  }
+
+  def getSubmissionUniqueId(): HttpRequestBuilder =
     http("get submission id")
       .post(submissionUrl)
       .header("Content-Type", "application/json")
@@ -84,8 +98,8 @@ object AuthRequests extends Configuration {
       .post(authWizardUrl)
       .formParam("authorityId", "")
       .formParam("gatewayToken", "")
-      .formParam("redirectionUrl", redirectionUrl + "${submissionUniqueId}")
-      .formParam("excludeGnapToken", "false")
+      .formParam("redirectionUrl", redirectionUrl + "${uniqueId}")
+      .formParam("excludeGnapToken", "true")
       .formParam("credentialStrength", "strong")
       .formParam("confidenceLevel", "250")
       .formParam("affinityGroup", "Individual")
@@ -98,7 +112,7 @@ object AuthRequests extends Configuration {
       .formParam("additionalInfo.profile", "")
       .formParam("additionalInfo.groupProfile", "")
       .formParam("additionalInfo.emailVerified", "N/A")
-      .formParam("nino", "AA000000A")
+      .formParam("nino", "${nino}")
       .formParam("groupIdentifier", "")
       .formParam("agent.agentId", "")
       .formParam("agent.agentCode", "")
@@ -142,11 +156,10 @@ object AuthRequests extends Configuration {
       .check(status.is(303))
       .silent
 
-  val navigateToAuthPage: HttpRequestBuilder =
-    http("Navigate to auth page ")
-      .get(redirectionUrl + "${submissionUniqueId}")
+  val navigateToSubmissionLandingPage: HttpRequestBuilder =
+    http("Navigate to submission landing page ")
+      .get(redirectionUrl + "${uniqueId}")
       .check(status.is(303))
-      .silent
 
   def getSubmissionBearerToken(): HttpRequestBuilder =
     http("getSubmission id")

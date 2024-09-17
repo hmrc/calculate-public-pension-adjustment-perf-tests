@@ -1,5 +1,5 @@
 {
-  "_id": "calculationSessionId",
+  "_id": "${nino}",
   "data": {
     "savingsStatement": true,
     "navigation": {
@@ -39,7 +39,7 @@
       }
     }
   },
-  "uniqueId": "calculationUniqueId",
+  "uniqueId": "${uniqueId}",
   "lastUpdated": {
     "$date": {
       "$numberLong": "1713000152270"
