@@ -23,12 +23,13 @@ import uk.gov.hmrc.perftests.calculatefrontend.Configuration
 
 object LTARequests extends Configuration {
   val calculateRoute: String                                = s"$calculationUrl/public-pension-adjustment"
-  val hadBenefitCrystallisationEventPageUrl: String         = "/lifetime-allowance/benefit-crystallisation-event"
+  val hadBenefitCrystallisationEventPageUrl: String         = "/triage-journey/lifetime-allowance/benefit-crystallisation-event"
   val dateOfBenefitCrystallisationEventPageUrl: String      = "/lifetime-allowance/benefit-crystallisation-event-date"
-  val toldChangeInLtaPercentagePageUrl: String              = "/lifetime-allowance/lifetime-allowance-percentage-change"
+  val toldChangeInLtaPercentagePageUrl: String              =
+    "/triage-journey/lifetime-allowance/lifetime-allowance-percentage-change"
   val percentageCausedChangeInChargePageUrl: String         = "/lifetime-allowance/lifetime-allowance-charge-change"
   val moreThanOneBenefitCrystallisationEventPageUrl: String =
-    "/lifetime-allowance/more-than-one-benefit-crystallisation-event"
+    "/triage-journey/lifetime-allowance/more-than-one-benefit-crystallisation-event"
   val ltaProtectionOrEnhancementsPageUrl: String            = "/lifetime-allowance/protection-enhancements"
   val enhancementTypePageUrl: String                        = "/lifetime-allowance/enhancement-type"
   val internationalEnhancementReferencePageUrl: String      = "/lifetime-allowance/international-enhancement-reference"
@@ -54,7 +55,8 @@ object LTARequests extends Configuration {
   val newValueOfAnnualPaymentPageUrl: String      = "/lifetime-allowance/new-value-of-annual-payment"
   val whoPaidExtraChargePageUrl: String           = "/lifetime-allowance/who-paid-extra-charge"
   val lTAChargeUrl: String                        = "/triage-journey/LTA-charge"
-  val lifeTimeAllowancePercentageChange: String   = "/lifetime-allowance/lifetime-allowance-percentage-change"
+  val lifeTimeAllowancePercentageChange: String   =
+    "/triage-journey/lifetime-allowance/lifetime-allowance-percentage-change"
   val lifeTimeAllowancePercentageIncrease: String = "/lifetime-allowance/lifetime-allowance-percentage-increase"
   val lifeTimeAllowanceNewCharge: String          = "/lifetime-allowance/lifetime-allowance-new-charge"
   val otherSchemeLTANotification: String          = "/triage-journey/other-scheme-LTA-notification"

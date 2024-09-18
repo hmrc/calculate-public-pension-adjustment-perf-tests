@@ -26,7 +26,7 @@ object BasicWorkFlowRequests extends Configuration {
   val calculateRoute: String                                     = s"$calculationUrl/public-pension-adjustment"
   val savingsStatementPageUrl: String                            = "/pension-saving-statement"
   val resubmittingAdjustmentPageUrl: String                      = "/change-previous-adjustment"
-  val reportingChangePageUrl: String                             = "/charges"
+  val reportingChangePageUrl: String                             = "/triage-journey/AA-or-LTA-charges"
   val checkYourAnswersPageUrl: String                            = "/check-your-answers-setup"
   val affectedByRemedy: String                                   = "/triage-journey/affected-by-remedy"
   val receivedLetter: String                                     = "/triage-journey/received-letter"
