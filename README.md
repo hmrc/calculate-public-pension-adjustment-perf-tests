@@ -45,7 +45,7 @@ sbt -DrunLocal=true gatling:test
 Run smoke test (staging) as follows:
 
 ```bash
-sbt -Dperftest.runSmokeTest=true -DrunLocal=false gatling:test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=true gatling:test
 ```
 
 ## Scalafmt

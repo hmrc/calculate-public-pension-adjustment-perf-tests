@@ -1,5 +1,5 @@
 {
-  "_id": "Int-${uniqueId}",
+  "_id": "${nino}",
   "data": {
     "savingsStatement": true,
     "navigation": {
@@ -27,7 +27,6 @@
                 "schemeTaxRef": "00348916RO"
               },
               "PensionSchemeInput2016preAmounts": {
-                "originalPIA": 1,
                 "revisedPIA": 2
               },
               "payACharge": true,
